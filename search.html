@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="images/site.webmanifest">
+	<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="images/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<title>СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+	<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.touchSwipe.min.js"></script>
+	<script type="text/javascript" src="assets/js/slick.min.js"></script>	
+	<script type="text/javascript" src="assets/js/jquery.json.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="assets/js/scripts.js"></script>
+	<!--[if (gte IE 6)&(lte IE 8)]>
+	<script type="text/javascript" src="assets/js/html5.js"></script> 
+	<script type="text/javascript">
+		var E=('article:aside:audio:canvas:figure:footer:header:hgroup:nav:section:video:output:details:keygen:meter:progress:figcaption:main:mark:summary:time:wbr').split(':');
+		for(var c=0;c<E.length;c++){document.createElement(E[c]);} 
+	</script>
+	<![endif]-->
+</head>
+
+<body>
+	<div id="layout">
+		<header>
+			<div class="holder">
+				<a href="#" id="logo">
+					<img src="images/logo_image_sm.png" alt="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" title="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" class="img">
+					<img src="images/logo_text.svg" alt="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" title="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" class="txt">
+				</a>
+
+				<div class="menu-holder">
+					<nav id="menu-main">
+						<ul>						
+							<li class="bold opened">
+								<a href="inbox.html"><strong>Входящие</strong>&nbsp;(9)</a>
+								<ul>
+									<li><a href="execution.html">На исполнение&nbsp;(2)</a></li>
+									<li><a href="distribution.html">По рассылке&nbsp;(1)</a></li>
+									<li><a href="approval.html">На согласование&nbsp;(0)</a></li>
+									<li><a href="signature.html">На подпись&nbsp;(9)</a></li>
+									<li><a href="resolution.html">Проекты резолюций&nbsp;(9)</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="control.html"><strong>На контроле</strong>&nbsp;(2)</a>
+							</li>
+						</ul>
+						<div class="close"></div>
+					</nav>
+				</div>
+
+				<div id="bl-account">
+					<span class="account">Шаверов М. Ф.</span>
+					<a href="#" class="logout">Выйти</a>
+				</div>
+
+				<div id="bl-controls">
+					<div class="search">
+						<form action="phonebook.html" method="post">
+							<input type="text" name="keyword" maxlength="255" placeholder="Поиск" value="">
+							<input type="submit" name="subm" value="" class="submit">
+						</form>
+					</div>
+					<a href="tel:88009999999" class="tel"><img src="images/ico_phone.svg" alt="Позвонить на горячую линию" title="Позвонить на горячую линию"></a>
+					<a href="#" class="info"><img src="images/ico_info.svg" alt="" title=""></a>
+				</div>
+			</div>
+		</header>
+
+		<section id="search">
+			<div class="bread-crumbs">
+				<ul class="holder">
+					<li><a href="inbox.html">Входящие</a></li>
+					<li>Поиск</li>
+				</ul>
+			</div>
+
+			<div class="holder">
+				<h1>Поиск</h1>
+
+				<div class="tabs" id="tabs-search">
+					<ul>
+						<li><a href="#search-common">Общий</a></li>
+						<li><a href="#search-inbox">Входящие</a></li>
+						<li><a href="#search-sent">Исходящие</a></li>
+						<li><a href="#search-inner">Внутренние</a></li>
+						<li><a href="#search-appeals">Обращения граждан</a></li>
+						<li><a href="#search-project">Проект документа</a></li>
+						<li><a href="#search-text">По тексту</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="forms">
+				<form action="#" method="post">
+					<div id="search-common">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder regnumber">
+									<label for="search-common-regnumber">Регистрационный номер</label>
+									<input type="text" name="regnumber" id="search-common-regnumber" placeholder="Ввести" maxlength="255">
+								</div>
+								<div class="fld-holder doctype">
+									<label for="search-common-doctype">Вид документа</label>
+									<select id="search-common-doctype" placeholder="Выбрать">
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+									</select>
+								</div>
+								<div class="fld-holder group">
+									<label for="search-common-group">Группа</label>
+									<select id="search-common-group" placeholder="Выбрать">
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+										<option>Проект документа</option>
+										<option>Обращения граждан</option>
+									</select>
+								</div>
+							</div>
+							<div class="filter-line">
+								<div class="fld-holder date">
+									<label for="search-common-date-from">Дата с</label>
+									<input type="text" name="date_from" id="search-common-date-from" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+								</div>
+								<div class="fld-holder date">
+									<label for="search-common-date-to">Дата по</label>
+									<input type="text" name="date_to" id="search-common-date-to" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+								</div>
+								<div class="fld-holder contents">
+									<label for="search-common-contents">Содержание</label>
+									<input type="text" name="contents" id="search-common-contents" placeholder="Ввести" maxlength="255">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-inbox">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder sender">
+									<label for="search-inbox-sender">Отправитель</label>
+									<select name="sender" id="search-inbox-sender" placeholder="Выбрать">
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+									</select>
+								</div>
+							</div>
+							<div class="filter-line">
+								<div class="fld-holder docnumber">
+									<label for="search-inbox-docnumber">№ документа</label>
+									<select name="docnumber" id="search-inbox-docnumber" placeholder="Выбрать">
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+										<option>Отправитель 1</option>
+										<option>Отправитель пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder date">
+									<label for="search-inbox-date">Дата</label>
+									<input type="text" name="date" id="search-inbox-date" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+								</div>
+								<div class="fld-holder subject">
+									<label for="search-inbox-subject">Тема</label>
+									<select name="subject" id="search-inbox-subject" placeholder="Выбрать">
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-sent">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder signed">
+									<label for="search-sent-signed">Подписал</label>
+									<select name="signed" id="search-sent-signed" placeholder="Выбрать">
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder contractor">
+									<label for="search-sent-contractor">Исполнитель</label>
+									<select name="contractor" id="search-sent-contractor" placeholder="Выбрать">
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+									</select>
+								</div>
+							</div>
+							<div class="filter-line">
+								<div class="fld-holder addressee">
+									<label for="search-sent-addressee">Адресат</label>
+									<select name="addressee" id="search-sent-addressee" placeholder="Выбрать">
+										<option>Адресат 1</option>
+										<option>Адресат пример 2</option>
+										<option>Адресат 1</option>
+										<option>Адресат пример 2</option>
+										<option>Адресат 1</option>
+										<option>Адресат пример 2</option>
+										<option>Адресат 1</option>
+										<option>Адресат пример 2</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-inner">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder signed">
+									<label for="search-inner-signed">Подписал</label>
+									<select name="signed" id="search-inner-signed" placeholder="Выбрать">
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder contractor">
+									<label for="search-inner-contractor">Исполнитель</label>
+									<select name="contractor" id="search-inner-contractor" placeholder="Выбрать">
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder distribution">
+									<label for="search-sent-distribution">Рассылка</label>
+									<select name="distribution" id="search-sent-distribution" placeholder="Выбрать">
+										<option>Рассылка 1</option>
+										<option>Рассылка пример 2</option>
+										<option>Рассылка 1</option>
+										<option>Рассылка пример 2</option>
+										<option>Рассылка 1</option>
+										<option>Рассылка пример 2</option>
+										<option>Рассылка 1</option>
+										<option>Рассылка пример 2</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-appeals">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder person">
+									<label for="search-appeals-person">Гражданин</label>
+									<input type="text" name="regnumber" id="search-appeals-person" placeholder="Ввести" maxlength="255">
+								</div>
+								<div class="fld-holder subject">
+									<label for="search-appeals-subject">Тема</label>
+									<select name="subject" id="search-appeals-subject" placeholder="Выбрать">
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+										<option>Тема 1</option>
+										<option>Тема пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder contractor">
+									<label for="search-appeals-contractor">Исполнитель</label>
+									<select name="contractor" id="search-appeals-contractor" placeholder="Выбрать">
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+									</select>
+								</div>
+							</div>
+							<div class="filter-line">
+								<div class="fld-holder organisation">
+									<label for="search-appeals-organisation">Организация</label>
+									<select name="organisation" id="search-appeals-organisation" placeholder="Выбрать">
+										<option>Организация 1</option>
+										<option>Организация пример 2</option>
+										<option>Организация 1</option>
+										<option>Организация пример 2</option>
+										<option>Организация 1</option>
+										<option>Организация пример 2</option>
+										<option>Организация 1</option>
+										<option>Организация пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder sopr">
+									<label for="search-appeals-sopr">№ сопр.</label>
+									<input type="text" name="sopr" id="search-appeals-sopr" placeholder="Ввести" maxlength="255">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-project">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder contractor">
+									<label for="search-project-contractor">Исполнитель</label>
+									<select name="contractor" id="search-project-contractor" placeholder="Выбрать">
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+										<option>Исполнитель 1</option>
+										<option>Исполнитель пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder signed">
+									<label for="search-project-signed">Подписал</label>
+									<select name="signed" id="search-project-signed" placeholder="Выбрать">
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+										<option>Подписал 1</option>
+										<option>Подписал пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder vises">
+									<label for="search-project-vises">Визы</label>
+									<select name="vises" id="search-project-vises" placeholder="Выбрать">
+										<option>Визы 1</option>
+										<option>Визы пример 2</option>
+										<option>Визы 1</option>
+										<option>Визы пример 2</option>
+										<option>Визы 1</option>
+										<option>Визы пример 2</option>
+										<option>Визы 1</option>
+										<option>Визы пример 2</option>
+									</select>
+								</div>
+								<div class="fld-holder status">
+									<label for="search-project-status">Статус</label>
+									<select name="status" id="search-project-status" placeholder="Выбрать">
+										<option>Статус 1</option>
+										<option>Статус пример 2</option>
+										<option>Статус 1</option>
+										<option>Статус пример 2</option>
+										<option>Статус 1</option>
+										<option>Статус пример 2</option>
+										<option>Статус 1</option>
+										<option>Статус пример 2</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="search-text">
+						<div class="form holder">
+							<div class="filter-line">
+								<div class="fld-holder keyword">
+									<label for="search-text-keyword">Поиск по тексту файла</label>
+									<input type="text" name="sopr" id="search-text-keyword" placeholder="Ввести" maxlength="255">
+								</div>
+								<div class="fld-holder date">
+									<label for="search-text-date-from">Дата с</label>
+									<input type="text" name="date_from" id="search-text-date-from" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+								</div>
+								<div class="fld-holder date">
+									<label for="search-text-date-to">Дата по</label>
+									<input type="text" name="date_to" id="search-text-date-to" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="btn-line holder">
+						<input type="reset" class="btn type2 clear" value="Очистить поля">
+						<button class="btn do">Искать</button>
+					</div>
+				</form>
+			</div>
+
+			<div id="search-results" class="search-results">
+				<div class="holder">
+					<h2>Результаты</h2>
+
+					<div class="actions-right">
+						<div class="filter">
+							<form action="#" method="post">
+								<input type="text" name="keyword" placeholder="Ввести" maxlength="255"><button class="btn">Фильтр</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="table-holder">
+					<table cellspacing="0" cellpadding="0">
+						<thead>
+							<tr>
+								<th>Рег.номер</th>
+								<th>Дата регистрации</th>
+								<th>Содержание</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+							<tr>
+								<td>97652394564</td>
+								<td>12.09.2018</td>
+								<td>В решении о предоставлении лицензии и в документе, подтверждающем …</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!--
+				<div class="holder">
+					<h2>Результаты</h2>
+
+					<div class="empty">К сожалению, ничего не найдено</div>
+				</div>
+				-->
+			</div>
+		</section>
+	</div>
+
+	<div class="modal-fadeout"></div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="images/site.webmanifest">
+	<link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="images/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<title>СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css"/>
+	<script type="text/javascript" src="assets/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.touchSwipe.min.js"></script>
+	<script type="text/javascript" src="assets/js/slick.min.js"></script>	
+	<script type="text/javascript" src="assets/js/jquery.json.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.jscrollpane.min.js"></script>
+	<script type="text/javascript" src="assets/js/pdfobject.js"></script>
+	<script type="text/javascript" src="assets/js/scripts.js"></script>
+	<!--[if (gte IE 6)&(lte IE 8)]>
+	<script type="text/javascript" src="assets/js/html5.js"></script> 
+	<script type="text/javascript">
+		var E=('article:aside:audio:canvas:figure:footer:header:hgroup:nav:section:video:output:details:keygen:meter:progress:figcaption:main:mark:summary:time:wbr').split(':');
+		for(var c=0;c<E.length;c++){document.createElement(E[c]);} 
+	</script>
+	<![endif]-->
+</head>
+
+<body>
+	<div id="layout">
+		<header>
+			<div class="holder">
+				<a href="#" id="logo">
+					<img src="images/logo_image_sm.png" alt="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" title="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" class="img">
+					<img src="images/logo_text.svg" alt="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" title="СЭДКП | Открытая модульная система электронного документооборота и контроля исполнения поручений" class="txt">
+				</a>
+
+				<div class="menu-holder">
+					<nav id="menu-main">
+						<ul>						
+							<li class="bold opened">
+								<a href="inbox.html"><strong>Входящие</strong>&nbsp;(9)</a>
+								<ul>
+									<li><a href="execution.html">На исполнение&nbsp;(2)</a></li>
+									<li><a href="distribution.html">По рассылке&nbsp;(1)</a></li>
+									<li><a href="approval.html">На согласование&nbsp;(0)</a></li>
+									<li><a href="signature.html">На подпись&nbsp;(9)</a></li>
+									<li><a href="resolution.html">Проекты резолюций&nbsp;(9)</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="control.html"><strong>На контроле</strong>&nbsp;(2)</a>
+							</li>
+						</ul>
+						<div class="close"></div>
+					</nav>
+				</div>
+
+				<div id="bl-account">
+					<span class="account">Шаверов М. Ф.</span>
+					<a href="#" class="logout">Выйти</a>
+				</div>
+
+				<div id="bl-controls">
+					<div class="search">
+						<form action="phonebook.html" method="post">
+							<input type="text" name="keyword" maxlength="255" placeholder="Поиск" value="">
+							<input type="submit" name="subm" value="" class="submit">
+						</form>
+					</div>
+					<a href="tel:88009999999" class="tel"><img src="images/ico_phone.svg" alt="Позвонить на горячую линию" title="Позвонить на горячую линию"></a>
+					<a href="#" class="info"><img src="images/ico_info.svg" alt="" title=""></a>
+				</div>
+			</div>
+		</header>
+
+		<section id="document">
+			<div class="bread-crumbs">
+				<ul class="holder">
+					<li><a href="inbox.html">Входящие</a></li>
+					<li><a href="signature.html">На подпись</a></li>
+					<li>ВН-7</li>
+				</ul>
+			</div>
+
+			<div class="holder">
+				<h1 class="vh">ВН-7</h1>
+
+				<div class="actions-right">
+					<div class="date">От 03.10.2018</div>
+				</div>
+
+				<div class="text">
+					<p>Об образовании организационного комитета по подготовке и проведению празднования 100-летия Центрального аэрогидродинамического института имени профессора Н.Е. Жуковского</p>
+				</div>
+			</div>
+
+			<div class="block attachments">
+				<div class="holder">
+					<h2>Приложенные файлы</h2>
+
+					<ul class="menu" data-for="#attachment-frame-attachments">
+						<li class="active"><a href="demo/inbox_example.pdf" target="_blank" class="embed">Письмо список.pdf</a></li><!--
+						--><li><a href="demo/inbox_example2.pdf" target="_blank" class="embed">О направлении распределения.pdf</a></li><!--
+						--><li><a href="#" target="_blank">Указ президента.doc</a></li>
+					</ul>
+
+					<div class="attachment-frame" id="attachment-frame-attachments"></div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="modal-fadeout"></div>
+</body>
+</html>
