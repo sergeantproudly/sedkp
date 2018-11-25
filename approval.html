@@ -70,12 +70,7 @@
 				</div>
 
 				<div id="bl-controls">
-					<div class="search">
-						<form action="phonebook.html" method="post">
-							<input type="text" name="keyword" maxlength="255" placeholder="Поиск" value="">
-							<input type="submit" name="subm" value="" class="submit">
-						</form>
-					</div>
+					<a href="search.html" class="search"><span>Поиск</span></a>
 					<a href="tel:88009999999" class="tel"><img src="images/ico_phone.svg" alt="Позвонить на горячую линию" title="Позвонить на горячую линию"></a>
 					<a href="#" class="info"><img src="images/ico_info.svg" alt="" title=""></a>
 				</div>
@@ -90,7 +85,7 @@
 				</ul>
 			</div>
 
-			<div class="holder">
+			<div class="holder header-holder">
 				<h1>На согласование</h1>
 			</div>
 
@@ -192,7 +187,7 @@
 
 				<h1>Содержание</h1>
 
-				<div class="js-scroll" data-max-height="395">
+				<div class="js-scroll" data-max-height="-40" data-on-demand="true">
 					<p>О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории<br> 
 					МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории</p>
 					<p>О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории МОГАУ Детско-юношеский оздоровительный центр "Восточный Артэк». О строительстве плавательного бассейна, физкульторно-спортивного комплекса и нового жилого корпуса на 200 на территории<br> 
@@ -218,6 +213,232 @@
 						</div>
 					</form>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-wrapper" id="modal-manage-plan-item">
+		<div class="modal">
+			<div class="contents">
+				<div class="modal-close" title="Закрыть"></div>
+
+				<h1>Пункт резолюции</h1>
+
+				<form action="#" method="post">
+					<div class="form">
+						<div class="form-line">
+							<div class="fld-holder">
+								<label for="add-plan-item-number">Номер пункта</label>
+								<input type="text" name="number" id="add-plan-item-number" maxlength="255" placeholder="Ввести">
+							</div>
+							<div class="fld-holder">
+								<label for="add-plan-item-date">Плановая дата</label>
+								<input type="text" name="date" id="add-plan-item-date" placeholder="дд.мм.гггг" maxlength="10" class="js-date">
+							</div>
+						</div>
+						<div class="form-line contents">
+							<div class="fld-holder contents">
+								<label for="add-plan-item-template">Шаблон</label>
+								<select id="add-plan-item-template" placeholder="Выбрать">
+									<option>Шаблон 1</option>
+									<option>Шаблон 2</option>
+									<option>Шаблон 3</option>
+									<option>Шаблон 4</option>
+								</select>
+								<textarea name="contents" placeholder="Содержание резолюции"></textarea>
+							</div>
+						</div>
+						<div class="form-line actors">
+							<div class="fld-holder">
+								<label>Ответсвенные</label>
+								<div class="action-add" id="add-plan-item-add-responsible">Добавить</div>
+								<ul id="add-plan-item-responsible-list">
+									<li>
+										<span>Вадимов И.А.</span>
+										<span class="action-remove"></span>
+									</li>
+									<li>
+										<span>Каримов Р.Л.</span>
+										<span class="action-remove"></span>
+									</li>
+								</ul>
+							</div>
+							<div class="fld-holder">
+								<label>Исполнители</label>
+								<div class="action-add" id="add-plan-item-add-executors">Добавить</div>
+								<ul id="add-plan-item-executors-list">
+									<li>
+										<span>Ларина И.В.</span>
+										<span class="action-remove"></span>
+									</li>
+								</ul>
+							</div>
+						</div>					
+
+						<div class="btn-line">
+							<button class="btn type2 js-cancel">Отмена</button>
+							<button class="btn">Сохранить</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-wrapper" id="modal-attachments">
+		<div class="modal">
+			<div class="contents">
+				<div class="modal-close" title="Закрыть"></div>
+
+				<h1>Сопроводительные документы</h1>
+
+				<div class="js-scroll" data-max-height="395">
+					<ul>
+						<li>
+							<h3 class="og"><a href="document1.html">Т3-1445</a></h3>
+							<div class="agent">Аппарат Правительства Российской Федерации</div>
+							<div class="text">Прошу совместно рассмотреть и о результатах проинформировать Аппарат правительства РФ</div>
+							<div class="date">От 09.10.2018</div>
+						</li>
+						<li>							
+							<h3 class="og"><a href="document2.html">ТГ-П3-4382</a></h3>
+							<div class="agent">Правительство РФ</div>
+							<div class="text">Прошу обеспечить совместно с Правительством Москвовской области исполнение поручения Правительства РФ от 30 августа 2018 г. № ДМ-ПС-30 и доложить с проектом доклада Председателю Правительства РФ Д.А. Медведеву. Срок 15 сент...</div>
+							<div class="date">От 09.10.2018</div>
+						</li>
+						<li>							
+							<h3 class="pd"><a href="document3.html">МА-П7-9714</a></h3>
+							<div class="agent">Аппарат Правительства Российской Федерации</div>
+							<div class="text">Прошу совместно рассмотреть и о результатах проинформировать Аппарат правительства РФ. О направлении распределений расходов</div>
+							<div class="date">От 03.10.2018</div>
+						</li>
+						<li>							
+							<h3 class="pd"><a href="document4.html">П8-945</a></h3>
+							<div class="agent">ГАУЗ "Клиника Медицинского Университета"</div>
+							<div class="text">Прошу обеспечить совместно с Правительством Москвовской области исполнение поручения Правительства РФ от 30 августа 2018 г. № ДМ-ПС-30 и доложить с проектом доклада Председателю Правительства РФ Д.А. Медведеву.</div>
+							<div class="date">От 12.11.2018</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-wrapper" id="modal-add-responsible">
+		<div class="modal">
+			<div class="contents">
+				<div class="modal-close" title="Закрыть"></div>
+
+				<h1>Добавить ответственного</h1>
+
+				<form action="#" method="post">
+					<div class="form">						
+						<div class="form-line">
+							<label for="add-responsible-keyword">Поиск по имени</label>
+							<input type="text" name="keyword" id="add-responsible-keyword" maxlength="255" placeholder="Ввести">
+						</div>
+
+						<div class="js-scroll" data-max-height="350" data-on-demand="true">
+							<ul class="actors-list">
+								<li>
+									<input type="checkbox" name="actors-list-cb1" id="actors-list-responsible-cb1"><label for="actors-list-responsible-cb1">Авалов Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb2" id="actors-list-responsible-cb2"><label for="actors-list-responsible-cb2">Антонова Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb3" id="actors-list-responsible-cb3"><label for="actors-list-responsible-cb3">Алексеев Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb4" id="actors-list-responsible-cb4"><label for="actors-list-responsible-cb4">Балабанов Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb5" id="actors-list-responsible-cb5"><label for="actors-list-responsible-cb5">Болов Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb6" id="actors-list-responsible-cb6"><label for="actors-list-responsible-cb6">Вавилов Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb7" id="actors-list-responsible-cb7"><label for="actors-list-responsible-cb7">Войнов Дмитрий Алексеевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb8" id="actors-list-responsible-cb8"><label for="actors-list-responsible-cb8">Голубихин Артем Сергеевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb9" id="actors-list-responsible-cb9"><label for="actors-list-responsible-cb9">Гурцкий Сергей Геннадиевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb10" id="actors-list-responsible-cb10"><label for="actors-list-responsible-cb10">Доренко Петр Александрович</label>
+								</li>
+							</ul>
+						</div>
+
+						<div class="btn-line">
+							<button class="btn type2 js-cancel">Отмена</button>
+							<button class="btn">Сохранить</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-wrapper" id="modal-add-executors">
+		<div class="modal">
+			<div class="contents">
+				<div class="modal-close" title="Закрыть"></div>
+
+				<h1>Добавить исполнителя</h1>
+
+				<form action="#" method="post">
+					<div class="form">						
+						<div class="form-line">
+							<label for="add-executors-keyword">Поиск по имени</label>
+							<input type="text" name="keyword" id="add-executors-keyword" maxlength="255" placeholder="Ввести">
+						</div>
+
+						<div class="js-scroll" data-max-height="350" data-on-demand="true">
+							<ul class="actors-list">
+								<li>
+									<input type="checkbox" name="actors-list-cb1" id="actors-list-executors-cb1"><label for="actors-list-executors-cb1">Авалов Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb2" id="actors-list-executors-cb2"><label for="actors-list-executors-cb2">Антонова Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb3" id="actors-list-executors-cb3"><label for="actors-list-executors-cb3">Алексеев Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb4" id="actors-list-executors-cb4"><label for="actors-list-executors-cb4">Балабанов Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb5" id="actors-list-executors-cb5"><label for="actors-list-executors-cb5">Болов Илья Константинович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb6" id="actors-list-executors-cb6"><label for="actors-list-executors-cb6">Вавилов Анатолий Викторович</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb7" id="actors-list-executors-cb7"><label for="actors-list-executors-cb7">Войнов Дмитрий Алексеевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb8" id="actors-list-executors-cb8"><label for="actors-list-executors-cb8">Голубихин Артем Сергеевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb9" id="actors-list-executors-cb9"><label for="actors-list-executors-cb9">Гурцкий Сергей Геннадиевич</label>
+								</li>
+								<li>
+									<input type="checkbox" name="actors-list-cb10" id="actors-list-executors-cb10"><label for="actors-list-executors-cb10">Доренко Петр Александрович</label>
+								</li>
+							</ul>
+						</div>
+
+						<div class="btn-line">
+							<button class="btn type2 js-cancel">Отмена</button>
+							<button class="btn">Сохранить</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

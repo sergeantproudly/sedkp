@@ -34,6 +34,7 @@ $padding-edges-tablet: 3.5%;
 $padding-edges-tablet-small: 4.75%;
 $padding-edges-mobile: 4.75%;
 $animation-speed: 0.45s;
+$adaptive-width-desktop-small: 1430px;
 $adaptive-width-tablet: 1000px;
 $adaptive-width-tablet-middle: 850px;
 $adaptive-width-tablet-small: 600px;
@@ -201,6 +202,7 @@ b,strong{
 		background-color: $color-button-disabled;
 		color: $color-button-text-disabled;
 		@extend .transition-all;
+		cursor: default;
 		&:hover {
 			background-color: $color-button-disabled;
 			color: $color-button-text-disabled;
@@ -417,6 +419,11 @@ a.dotted{
 %box-shadow-none {
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
 }
+@mixin box-shadow($a, $b, $c, $d) {
+	box-shadow: $a $b $c $d;
+	-webkit-box-shadow: $a $b $c $d;
+	-moz-box-shadow: $a $b $c $d;
+}
 %flex {
 	display: -webkit-box;
 	display: -moz-box;
@@ -428,6 +435,10 @@ a.dotted{
 	@extend %flex;
 	justify-content: space-between;
 	-webkit-justify-content: space-between;
+}
+@mixin flex-cancel() {
+	display: block;
+    flex: 0 0 auto;
 }
 .fadeout-holder {
 	position: relative;

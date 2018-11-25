@@ -105,7 +105,11 @@ h6,
 	cursor: default;
 }
 p{
-	margin-bottom: 35px;
+	margin-bottom: 25px;
+
+	@media (max-width: $adaptive-width-mobile) {
+		margin-bottom: 18px;
+	}
 }
 ol, ul{
 	list-style: none;
@@ -239,14 +243,20 @@ textarea {
 }
 
 input.date {
+	padding-right: 38px;
+
 	& + i {
 		display: inline-block;
 		vertical-align: middle;
 		width: 17px;
 		height: 16px;
 		background-image: url('../../images/ico_calendar.svg');
-		margin: -4px 0 0 -32px;
+		margin: 0 0 0 -32px;
 		cursor: pointer;
+
+		@media (max-width: $adaptive-width-mobile) {
+			margin: -12px 0 0 -28px;
+		}
 	}
 }
 
@@ -371,6 +381,9 @@ select {
 	.line {
 		margin-bottom: 15px;
 	}
+}
+.jspHorizontalBar {
+	display: none;
 }
 .ui-slider-horizontal {
 	height: 7px;
@@ -561,6 +574,7 @@ header {
 					height: 19px;
 					background-size: 24px 19px;
 					padding: 19px 16px 18px;
+					margin-left: -16px;
 				}
 
 				&:hover {
@@ -634,13 +648,18 @@ header {
 				top: 0;
 				left: 0;
 				width: 247px;
-				min-height: 100vh;
+				height: 100vh;
+				overflow: hidden;
 				box-sizing: border-box;
 				cursor: default;
 				padding: 75px 0 85px;
 				background: $background-color-grayblue;
 				z-index: 101;
 				@extend .transition-all;
+
+				@media (max-width: $adaptive-width-mobile) {
+					padding-top: 55px;
+				}
 				
 				#menu-main {
 					position: static;
@@ -661,7 +680,7 @@ header {
 				.close {
 					position: fixed;
 					top: 0;
-					left: 30px;
+					@extend %edge-left;
 					width: 33px;
 					height: 33px;
 					padding: 21px;
@@ -672,6 +691,18 @@ header {
 					background: url('../../images/ico_close_blue.svg') no-repeat center;
 					z-index: 99;
 					@extend .rotate-180-start;
+
+					@media (min-width: $adaptive-width-desktop-small) {
+						left: 30px;
+					}
+
+					@media (max-width: $adaptive-width-mobile) {
+						padding: 15px;
+						margin-left: -15px;
+						width: 24px;
+						height: 24px;
+						background-image: url('../../images/ico_close_blue_mob.svg');
+					}
 
 					&:hover {
 						@extend .rotate-180-end;
@@ -700,7 +731,7 @@ header {
 			text-decoration: none;
 
 			@media (max-width: $adaptive-width-mobile) {
-				margin-left: 32px;
+				margin-left: 36px;
 			}
 
 			img {
@@ -776,6 +807,11 @@ header {
 				padding-top: 29px;
 				color: #868b8e;
 				text-decoration: none;
+				@extend .transition-opacity;
+
+				@media (max-width: $adaptive-width-mobile) {
+					opacity: 0;
+				}
 
 				&:before {
 					content: '';
@@ -785,6 +821,31 @@ header {
 					height: 16px;
 					background-image: url('../../images/ico_logout.svg');
 					margin: -4px 9px 0 0;
+				}
+			}
+
+			.html-mobile-opened & {
+				.logout {
+					@extend .transition-opacity;
+				}
+
+				@media (max-width: $adaptive-width-mobile) {
+					display: block;
+					top: 100vh;
+					left: $padding-edges-mobile;
+					right: auto;
+					margin-top: -75px;
+					margin-right: 0;
+					z-index: 102;
+
+					.account {
+						display: none;
+					}
+
+					.logout {
+						font-size: 16px;
+						opacity: 1;
+					}
 				}
 			}
 		}
@@ -802,14 +863,50 @@ header {
 				display: inline-block;
 				vertical-align: top;
 				position: relative;
+				width: 100px;
+				height: 38px;
+				font-size: 16px;
+				line-height: 16px;
+				background-color: #fff;
+				color: #363D42;
+				@include radius(3px);
+				padding: 11px 7px 7px 36px;
+				text-decoration: none;
 
 				@media (max-width: $adaptive-width-mobile) {
 					border-left: 1px solid #CFDBE3;
 					border-right: 1px solid #CFDBE3;
 					padding: 11px;
+					height: 56px;
+					width: 56px;
+					background-color: transparent;
+
+					&:before {
+						content: '';
+						position: absolute;
+						top: 11px;
+						left: 11px;
+						width: 34px;
+						height: 34px;
+						background-color: #fff;
+						z-index: 0;
+					}
+
+					&:after {
+						z-index: 1;
+					}
+
+					& > span {
+						display: none;
+					}
 				}
 
-				.submit {
+				&:before {
+					@include radius(3px);
+				}
+
+				&:after {
+					content: '';
 					display: block;
 					position: absolute;
 					top: 12px;
@@ -825,31 +922,6 @@ header {
 						left: 20px;
 						background-image: url('../../images/ico_search_blue.svg');
 					}
-				}
-
-				input[type="text"],
-				input[type="search"] {
-					width: 100px;
-					height: 38px;
-					background-color: #fff;
-					border: 0;
-					font-size: 16px;
-					line-height: 16px;
-					color: #363D42;
-					@include radius(3px);
-					padding: 8px 7px 7px 36px;
-
-					@media (max-width: $adaptive-width-mobile) {
-						width: 34px;
-						height: 34px;
-						padding: 0;
-						font-size: 0;
-					}
-
-					&::-webkit-input-placeholder { color: #363D42; }
-					&::-moz-placeholder { color: #363D42; }
-					&:-moz-placeholder { color: #363D42; }
-					&:-ms-input-placeholder { color: #363D42; }
 				}
 			}
 
@@ -916,133 +988,158 @@ header {
 	& + section {
 		padding-top: 93px;
 		min-height: 100%;
+
+		@media (max-width: $adaptive-width-mobile) {
+			padding-top: 70px;
+		}
 	}
 }
 
-#enter {
+.enter {
 	height: 100%;
 	text-align: center;
 	background-color: $background-color-grayblue;
 
-	@media (max-width: $adaptive-width-mobile) {
-		min-height: 100%;
-		height: auto;
-		padding-bottom: 30px;
-	}
-
-	& > .holder {
-		text-align: center;
-		display: table;
+	section {
 		height: 100%;
-		width: 100%;
-		padding: 0 0 5%;
 
-		@media (max-width: $adaptive-width-tablet-small) {
-            padding: 50px $padding-edges-tablet-small 15px;
-        }
+		@media (max-width: $adaptive-width-tablet-middle) {
+			min-height: 100%;
+			padding-bottom: 30px;
+		}
 
-		& > div {
-			display: table-cell;
-			@media (max-width: $adaptive-width-tablet-small) {
+		& > .holder {
+			text-align: center;
+			display: table;
+			height: 100%;
+			width: 100%;
+			padding: 0 0 5%;
+
+			@media (orientation:portrait) {
 				padding: 0;
-			}
-		}
-	}
 
-	.logo {
-		margin-bottom: 9px;
-
-		.img {
-			width: 111px;
-			height: 128px;
-			margin-bottom: 22px;
-
-			@media (max-width: $adaptive-width-mobile) {
-				width: 69px;
-				margin-bottom: 18px;
-			}
-		}
-
-		.txt {
-			width: 107px;
-			height: 29px;
-
-			@media (max-width: $adaptive-width-mobile) {
-				width: 70px;
-			}
-		}
-	}
-
-	h1,
-	.h1 {
-		font-size: 11px;
-		font-weight: 400;
-		line-height: 1.36;
-		color: #555;
-		text-transform: none;
-		max-width: 328px;
-		margin: 0 auto 31px;
-
-		@media (max-width: $adaptive-width-mobile) {
-			padding: 0 15%;
-			max-width: none;
-		}
-	}
-
-	.form {
-		background-color: #fff;
-		padding: 27px 32px 45px;
-		max-width: 461px;
-		margin: 0 auto;
-		@include radius(6px);
-
-		@media (max-width: $adaptive-width-mobile) {
-			padding: 31px 15px 41px;
-		}
-
-		p {
-			font-size: 18px;
-			line-height: 1.33;
-			margin-bottom: 32px;
-
-			@media (max-width: $adaptive-width-mobile) {
-				font-size: 13px;
-				margin-bottom: 23px;
-			}
-		}
-
-		.input-holder {
-			max-width: 310px;
-			margin: 0 auto 12px;
-
-			input[type='text'],
-			input[type='email'],
-			input[type='password'] {
-				padding: 5px 0 9px;
-				border: 0;
-				border-bottom: 1px solid #A9A9A9;
-				height: 48px;
+				.form {
+					margin-bottom: 30px;				
+				}
 			}
 
-			i {
-				left: 0;
-			}
+			@media (max-width: $adaptive-width-tablet-small) {
+	            padding: 50px $padding-edges-tablet-small 15px;
+	        }
 
-			&.focused {
-				input[type='text'],
-				input[type='email'],
-				input[type='password'] {
-					padding-top: 12px;
+	        @media (max-width: $adaptive-width-mobile) {
+	        	padding-top: 29px;
+	        }
+
+			& > div {
+				display: table-cell;
+				@media (max-width: $adaptive-width-tablet-small) {
+					padding: 0;
 				}
 			}
 		}
 
-		.btn-line {
-			padding-top: 21px;
+		.logo {
+			margin-bottom: 9px;
 
-			.btn {
-				width: 100%;
+			@media (max-width: $adaptive-width-mobile) {
+				margin-bottom: 6px;
+			}
+
+			.img {
+				width: 111px;
+				height: 128px;
+				margin-bottom: 22px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					width: 69px;
+					height: 79px;
+					margin-bottom: 8px;
+				}
+			}
+
+			.txt {
+				width: 107px;
+				height: 29px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					width: 70px;
+					height: 19px;
+				}
+			}
+		}
+
+		h1,
+		.h1 {
+			font-size: 11px;
+			font-weight: 400;
+			line-height: 1.36;
+			color: #555;
+			text-transform: none;
+			max-width: 328px;
+			margin: 0 auto 31px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding: 0 15%;
+				max-width: none;
+			}
+		}
+
+		.form {
+			background-color: #fff;
+			padding: 27px 32px 45px;
+			max-width: 461px;
+			margin: 0 auto;
+			@include radius(6px);
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding: 31px 15px 41px;
+			}
+
+			p {
+				font-size: 18px;
+				line-height: 1.33;
+				margin-bottom: 32px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					font-size: 13px;
+					margin-bottom: 23px;
+				}
+			}
+
+			.input-holder {
 				max-width: 310px;
+				margin: 0 auto 12px;
+
+				input[type='text'],
+				input[type='email'],
+				input[type='password'] {
+					padding: 5px 0 9px;
+					border: 0;
+					border-bottom: 1px solid #A9A9A9;
+					height: 48px;
+				}
+
+				i {
+					left: 0;
+				}
+
+				&.focused {
+					input[type='text'],
+					input[type='email'],
+					input[type='password'] {
+						padding-top: 12px;
+					}
+				}
+			}
+
+			.btn-line {
+				padding-top: 21px;
+
+				.btn {
+					width: 100%;
+					max-width: 310px;
+				}
 			}
 		}
 	}
@@ -1114,6 +1211,10 @@ header {
 				color: #5D5D5D;
 				text-transform: uppercase;
 				border: 0;
+
+				@media (max-width: $adaptive-width-mobile) {
+					font-size: 11px;
+				}
 			}
 
 			td {
@@ -1149,6 +1250,11 @@ header {
 			vertical-align: middle;
 			@include radius(3px);
 			width: 100%;
+			height: 43px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				height: 40px;
+			}
 		}
 
 		.btn {
@@ -1157,6 +1263,39 @@ header {
 			height: 43px;
 			font-size: 12px;
 			margin-left: 17px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: 40px;
+				height: 40px;
+				padding: 11px 12px 11px 11px;
+				margin-left: 13px;
+			}
+
+			img {
+				display: none;
+
+				@media (max-width: $adaptive-width-mobile) {
+					display: block;
+				}
+			}
+
+			span {
+				@media (max-width: $adaptive-width-mobile) {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.table-holder {
+		.fadeout-holder {
+			.fadeout {
+				&:after {
+					@media (max-width: $adaptive-width-desktop-small) {
+						right: -5%;
+					}
+				}
+			}		
 		}
 	}
 
@@ -1166,6 +1305,11 @@ header {
 				text-align: center;
 				width: 25px;
 				padding-right: 20px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					padding-right: 17px;
+					padding-left: 0;
+				}
 
 				& + th {
 					padding-left: 0;
@@ -1181,6 +1325,11 @@ header {
 				border: 0;
 				width: 25px;
 				padding-right: 20px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					padding-left: 0;
+					padding-right: 17px;
+				}
 
 				& + td {
 					padding-left: 0;
@@ -1202,6 +1351,11 @@ header {
 .cols-holder {
 	@extend %flex-space-between;
 
+	@media (max-width: $adaptive-width-tablet-middle) {
+		flex: none;
+		display: block;
+	}
+
 	.side-col {
 		width: 413px;
 		flex: none;
@@ -1209,6 +1363,19 @@ header {
 		border-top: 1px solid #E0E0E0;
 		border-right: 1px solid #E0E0E0;
 		background-color: $background-color-gray;
+
+		@media (max-width: $adaptive-width-tablet) {
+			width: 340px;
+		}
+
+		@media (max-width: $adaptive-width-tablet-middle) {
+			display: block;
+			width: auto;
+		}
+
+		@media (max-width: $adaptive-width-mobile) {
+			border-top: 0;
+		}
 	}
 
 	.main-col {
@@ -1216,9 +1383,22 @@ header {
 		height: 100%;
 		border-top: 1px solid #E0E0E0;
 
+		@media (max-width: $adaptive-width-tablet-middle) {
+			display: none;
+		}
+
+		@media (max-width: $adaptive-width-mobile) {
+			border-top: 0;
+		}
+
 		.block {
 			padding: 16px 30px 23px 19px;
 			border-bottom: 1px solid #E0E0E0;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-left: $padding-edges-tablet-small;
+				padding-right: $padding-edges-tablet-small;
+			}
 		}
 	}
 }
@@ -1235,6 +1415,10 @@ header {
 			position: absolute;
 			top: 93px;
 			@extend %edge-left;
+
+			@media (max-width: $adaptive-width-mobile) {
+				top: 73px;
+			}
 		}
 	}
 
@@ -1244,10 +1428,18 @@ header {
 		left: 0;
 		width: 100%;
 
+		@media (max-width: $adaptive-width-mobile) {
+			top: 70px;
+		}
+
 		& + .holder {
 			h1,
 			.h1 {
 				top: 123px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					top: 99px;
+				}
 			}
 		}
 	}
@@ -1255,6 +1447,11 @@ header {
 	.cols-holder {
 		padding-top: 135px;
 		min-height: 100vh;
+		@extend .transition-padding-top;
+
+		@media (max-width: $adaptive-width-mobile) {
+			padding-top: 111px;
+		}
 
 		.side-col {
 			.filter {
@@ -1262,12 +1459,39 @@ header {
 				background-color: #fff;
 				@extend %flex-space-between;
 
+				@media (max-width: $adaptive-width-tablet-middle) {
+					padding-left: $padding-edges-tablet;
+					padding-right: $padding-edges-tablet;
+				}
+
+				@media (max-width: $adaptive-width-tablet-small) {
+					padding-left: $padding-edges-tablet-small;
+					padding-right: $padding-edges-tablet-small;
+				}
+
+				@media (max-width: $adaptive-width-mobile) {
+					padding-top: 0;
+				}
+
 				input[type="text"],
 				input[type="search"] {
 					width: 100%;
 					height: 32px;
 					border-color: #DBE0E6;
 					@include radius(3px);
+
+					@media (max-width: $adaptive-width-tablet) {
+						width: 196px;
+					}
+
+					@media (max-width: $adaptive-width-tablet-middle) {
+						width: 100%;
+						height: 40px;
+					}
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 72%;
+					}
 				}
 
 				.btn {
@@ -1278,6 +1502,16 @@ header {
 					font-weight: 400;
 					line-height: 12px;
 					margin-left: 10px;
+
+					@media (max-width: $adaptive-width-tablet-middle) {
+						height: 40px;
+					}
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 24%;
+						margin-left: 4%;
+						padding: 7px;
+					}
 				}
 			}
 
@@ -1293,6 +1527,11 @@ header {
 						position: relative;
 						cursor: pointer;
 						@extend .transition-all;
+
+						@media (max-width: $adaptive-width-tablet-middle) {
+							padding-left: $padding-edges-tablet;
+							padding-right: $padding-edges-tablet;
+						}
 
 						&:first-child {
 							border-top: 1px solid #E0E0E0;						
@@ -1450,7 +1689,11 @@ header {
 					.date {
 						font-size: 13px;
 						color: #737373;
-						margin-bottom: 1px;
+						margin: -6px 0 7px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							margin-bottom: 17px;
+						}
 					}
 
 					h2,
@@ -1463,14 +1706,45 @@ header {
 					input[type="search"] {
 						width: 100%;
 						@include radius(3px);
+
+						@media (max-width: $adaptive-width-mobile) {
+							display: none;
+						}
 					}
 				}
 
 				.plan {
 					padding: 8px 0 20px 19px;
 
+					@media (max-width: $adaptive-width-mobile) {
+						position: relative;
+						width: 100%;
+						overflow: hidden;
+
+						&:after {
+							content: '';
+							display: block;
+							position: absolute;
+							top: 0;
+							right: 0;
+							width: 45%;
+							height: 100%;
+							background: linear-gradient(90deg, rgba(255, 255, 255, 0.0001) 0%, #FFFFFF 100%);
+						}
+
+						&.scrolled-touched {
+							&:after {
+								display: none;
+							}
+						}
+					}
+
 					.plan-table {
 						margin-bottom: 15px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 540px;
+						}
 					}
 
 					table {
@@ -1478,12 +1752,13 @@ header {
 
 						tr {
 							th {
-								padding: 0 9px 8px;
+								padding: 0 16px 8px;
 								font-size: 11px;
 								font-weight: 400;
 								color: #797979;
 								text-transform: uppercase;
 								text-align: left;
+								vertical-align: bottom;
 								border-bottom: 1px solid #E0E0E0;
 
 								&:first-child {
@@ -1494,9 +1769,8 @@ header {
 									padding-right: 0;
 								}
 							}
-
 							td {
-								padding: 10px 9px 15px;
+								padding: 10px 16px 15px;
 								font-size: 14px;
 								font-weight: 400;
 								border-bottom: 1px solid #E0E0E0;
@@ -1512,6 +1786,7 @@ header {
 								.ui-checkboxradio-label {
 									font-size: 14px;
 									color: #252525;
+									white-space: nowrap;
 								}
 
 								.boss {
@@ -1538,6 +1813,14 @@ header {
 						.btn {
 							margin-right: 15px;
 							padding: 12px 16px 11px;
+
+							@media (max-width: $adaptive-width-mobile) {
+								width: 100%;
+								height: 32px;
+								font-size: 12px;
+								padding: 6px 16px;
+								margin: 0 0 10px;
+							}
 						}
 					}
 				}
@@ -1549,11 +1832,22 @@ header {
 					margin-bottom: 20px;
 					font-size: 0;
 
+					@media (max-width: $adaptive-width-mobile) {
+						width: auto;
+						min-width: 0;
+						margin: 0;
+					}
+
 					.btn {
 						padding: 8px 20px 9px;
 						font-size: 12px;
 						font-weight: 400;
 						margin-left: 16px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 49%;
+							margin-left: 2%;
+						}
 
 						&:first-child {
 							margin-left: 0;
@@ -1575,6 +1869,10 @@ header {
 						font-size: 0;
 						margin: 0 0 27px -16px;
 
+						@media (max-width: $adaptive-width-mobile) {
+							margin-left: -13px;
+						}
+
 						li {
 							display: inline-block;
 							vertical-align: top;
@@ -1583,6 +1881,12 @@ header {
 							min-height: 40px;
 							color: #7C7C7C;
 
+							@media (max-width: $adaptive-width-mobile) {
+								font-size: 12px;
+								margin: 0 0 5px 13px;
+								min-height: 32px;
+							}
+
 							a {
 								display: block;
 								text-decoration: none;
@@ -1590,6 +1894,10 @@ header {
 								padding: 10px 21px;
 								border: 1px solid #E1E7EB;
 								@include radius(2px);
+
+								@media (max-width: $adaptive-width-mobile) {
+									padding: 6px 15px;
+								}
 							}
 
 							&.active {
@@ -1609,11 +1917,25 @@ header {
 						max-height: 800px;
 						box-shadow: 0px 2px 13px rgba(172, 172, 172, 0.5);
 					}
+
+					.actions-right {
+						margin-top: -10px;
+						margin-bottom: -30px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							padding-top: 2px;
+							margin-bottom: 14px;
+						}
+					}
 				}
 
 				.inner-contents {
 					padding-left: 0;
 					padding-right: 0;
+
+					@media (max-width: $adaptive-width-mobile) {
+						padding-bottom: 19px;
+					}
 
 					h2,
 					.h2 {
@@ -1621,11 +1943,24 @@ header {
 						font-weight: 700;
 						margin-bottom: 20px;
 						padding: 0 21px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							margin-bottom: 10px;
+							padding-left: $padding-edges-tablet-small;
+							padding-right: $padding-edges-tablet-small;
+						}
 					}
 
 					.txt {
 						padding: 19px 21px 0;
 						border-top: 1px solid #E0E0E0;
+
+						@media (max-width: $adaptive-width-mobile) {
+							border-top: 0;
+							padding-top: 0;
+							padding-left: $padding-edges-tablet-small;
+							padding-right: $padding-edges-tablet-small;
+						}
 					}
 				}
 
@@ -1636,13 +1971,35 @@ header {
 						padding: 8px 25px 9px;
 						font-size: 12px;
 						font-weight: 400;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 100%;
+							position: relative;
+							top: 44px;
+						}
 					}
 
 					.actions-right {
 						margin: -32px 0 0 auto;
 
+						@media (max-width: $adaptive-width-mobile) {
+							margin-bottom: 44px
+						}
+
 						.btn {
 							margin-left: 11px;
+
+							@media (max-width: $adaptive-width-mobile) {
+								width: 48%;
+								margin-left: 4%;
+								padding: 8px 10px 9px;
+								position: static;
+								top: auto;
+
+								&:first-child {
+									margin-left: 0;
+								}
+							}
 						}
 					}
 				}
@@ -1653,6 +2010,10 @@ header {
 	&#projects {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
 
 			#doc-list {
 				ul {
@@ -1671,24 +2032,40 @@ header {
 	&#execution {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
 		}
 	}
 
 	&#distribution {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
 		}
 	}
 
 	&#control {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
 		}
 	}
 
 	&#signature {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
 
 			.main-col {
 				.plan {
@@ -1711,6 +2088,24 @@ header {
 	&#approval {
 		.cols-holder {
 			padding-top: 165px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 141px;
+			}
+		}
+	}
+
+	&.nopadd {
+		.cols-holder {
+			@extend .transition-padding-top;
+		}
+	}
+
+	@media (max-width: $adaptive-width-mobile) {
+		&.nopadd {
+			.cols-holder {
+				padding-top: 55px !important;
+			}
 		}
 	}
 }
@@ -1770,6 +2165,19 @@ header {
 }
 
 #search {
+	.tabs {
+		@media (max-width: $adaptive-width-tablet) {
+			margin-right: -$padding-edges-tablet;
+			overflow: hidden;
+
+			ul {
+				li {
+					margin-right: 20px;
+				}
+			}
+		}
+	}
+
 	.forms {
 		border-top: 1px solid #C8CBCC;
 		margin-bottom: 41px;
@@ -1781,30 +2189,67 @@ header {
 			margin-bottom: 24px;
 			display: block !important;
 
+			@media (max-width: $adaptive-width-tablet-small) {
+				padding-bottom: 21px;
+			}
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-bottom: 4px;
+			}
+
 			.filter-line {
+				@media (max-width: $adaptive-width-tablet-small) {
+					font-size: 0;
+				}
+
 				.fld-holder {
 					&.regnumber {
 						width: 24%;
+
+						@media (max-width: $adaptive-width-tablet-small) {
+							width: 100%;
+						}
 					}
 
 					&.doctype {
 						width: 36%;
+
+						@media (max-width: $adaptive-width-tablet-small) {
+							width: 100%;
+						}
 					}
 
 					&.group {
 						width: 36%;
+
+						@media (max-width: $adaptive-width-tablet-small) {
+							width: 100%;
+						}
 					}		
 
 					&.date {
 						width: 15%;
 
+						@media (max-width: $adaptive-width-tablet-small) {
+							display: inline-block;
+							width: 49%;
+						}
+
 						& + .date {
 							margin-left: 1%;
+
+							@media (max-width: $adaptive-width-tablet-small) {
+								margin-left: 2%;
+							}
 						}
 					}
 
 					&.contents {
 						width: 66%;
+
+						@media (max-width: $adaptive-width-tablet-small) {
+							width: 100%;
+						}
 					}	
 				}
 			}
@@ -1813,6 +2258,12 @@ header {
 		.form {
 			.filter-line {
 				@extend %flex-space-between;
+				align-items: flex-end;
+
+				@media (max-width: $adaptive-width-tablet-small) {
+					@include flex-cancel();
+					font-size: 0;
+				}
 			}
 
 			.fld-holder {
@@ -1820,6 +2271,12 @@ header {
 				vertical-align: top;
 				width: 32%;
 				margin: 0 0 24px 2%;
+
+				@media (max-width: $adaptive-width-tablet-small) {
+					display: block;
+					width: 100%;
+					margin: 0 0 17px;
+				}
 
 				&:first-child {
 					margin-left: 0;
@@ -1831,6 +2288,11 @@ header {
 					display: block;
 					text-transform: uppercase;
 					margin-bottom: 8px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						font-size: 10px;
+						margin-bottom: 7px;
+					}
 				}
 
 				input[type='text'],
@@ -1843,12 +2305,24 @@ header {
 					height: 45px;
 					width: 100%;
 					@include radius(3px);
+
+					@media (max-width: $adaptive-width-mobile) {
+						height: 40px;
+						padding-top: 14px;
+						padding-left: 13px;
+					}
 				}
 
 				.ui-selectmenu-button {
 					margin-left: 0;
 					width: 100%;
 					height: 45px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						height: 40px;
+						padding-top: 9px;
+						padding-left: 13px;
+					}
 
 					.ui-selectmenu-text {
 						font-size: 16px;
@@ -1865,14 +2339,30 @@ header {
 
 				&.docnumber {
 					width: 33%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.date {
 					width: 25%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+
+						i {
+							margin-top: -4px;
+						}
+					}
 				}
 
 				&.subject {
 					width: 40%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 			}
 		}
@@ -1882,6 +2372,10 @@ header {
 				&.signed,
 				&.contractor {
 					width: 50%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.addressee {
@@ -1895,10 +2389,18 @@ header {
 				&.signed,
 				&.contractor {
 					width: 26%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.distribution {
 					width: 44%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 			}
 		}
@@ -1907,22 +2409,42 @@ header {
 			.fld-holder {
 				&.person {
 					width: 26%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.subject {
 					width: 39%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.contractor {
 					width: 31%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.organisation {
 					width: 67%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.sopr {
 					width: 31%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 			}
 		}
@@ -1930,6 +2452,10 @@ header {
 		#search-project {
 			.fld-holder {
 				width: 25%;
+
+				@media (max-width: $adaptive-width-tablet-small) {
+					width: 100%;
+				}
 			}
 		}
 
@@ -1937,13 +2463,27 @@ header {
 			.fld-holder {
 				&.keyword {
 					width: 67%;
+
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 100%;
+					}
 				}
 
 				&.date {
 					width: 15%;
 
+					@media (max-width: $adaptive-width-tablet-small) {
+						width: 49%;
+						display: inline-block;
+						vertical-align: top;
+					}
+
 					& + .date {
 						margin-left: 1%;
+
+						@media (max-width: $adaptive-width-tablet-small) {
+							margin-left: 2%;
+						}
 					}
 				}
 			}
@@ -1954,11 +2494,23 @@ header {
 			font-size: 0;
 			padding-top: 16px;
 
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 4px;
+			}
+
 			.btn {
 				font-size: 12px;
 				font-weight: 600;
 				height: 43px;
 				margin-left: 17px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					margin-left: 6px;
+
+					&:first-child {
+						margin-left: 0;
+					}
+				}
 
 				&.clear {
 					width: 146px;
@@ -1990,22 +2542,77 @@ header {
 	.actions-right {
 		margin: -45px 0 16px;
 
+		@media (max-width: $adaptive-width-mobile) {
+			margin: 0 0 17px;
+			text-align: left;
+		}
+
 		.filter {
+			@media (max-width: $adaptive-width-mobile) {
+				form {
+					display: -webkit-box;
+					display: -moz-box;
+					display: -ms-flexbox;
+					display: -webkit-flex;
+					display: flex;
+					justify-content: space-between;
+					-webkit-justify-content: space-between;
+				}
+			}
+
 			input[type="text"],
 			input[type="search"] {
+				vertical-align: top;
 				width: 351px;
 				height: 45px;
 				@include radius(3px);
 				font-size: 16px;
 				margin-right: 16px;
+
+				@media (max-width: $adaptive-width-tablet-middle) {
+					width: 237px;
+				}
+
+				@media (max-width: $adaptive-width-mobile) {
+					margin-right: 13px;
+					width: 100%;
+					height: 40px;
+				}
 			}
 
 			.btn {
+				vertical-align: top;
 				width: 82px;
 				height: 45px;
 				padding: 10px;
 				font-size: 12px;
 				font-weight: 700;
+
+				img {
+					display: none;
+				}
+
+				@media (max-width: $adaptive-width-mobile) {
+					width: 40px;
+					height: 40px;
+					padding: 12px;
+
+					span {
+						display: none;
+					}
+
+					img {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.fadeout {
+		&:after {
+			@media (max-width: $adaptive-width-tablet) {
+				right: -5%;
 			}
 		}
 	}
@@ -2018,6 +2625,12 @@ header {
 		text-align: center;
 		margin: 71px 0 128px;
 
+		@media (max-width: $adaptive-width-mobile) {
+			font-size: 18px;
+			line-height: 1.2;
+			margin: 75px 0 55px;
+		}
+
 		&:before {
 			content: '';
 			display: block;
@@ -2025,6 +2638,13 @@ header {
 			height: 71px;
 			background-image: url('../../images/ico_empty.svg');
 			margin: 0 auto 27px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: 45px;
+				height: 53px;
+				background-size: contain;
+				margin-bottom: 19px;
+			}
 		}
 	}
 }
@@ -2084,7 +2704,7 @@ header {
 			margin: 0;
 			height: 100%;
 			display: table-cell;
-			vertical-align: middle;
+			vertical-align: top;
 			background: none;
 		}
 
@@ -2223,10 +2843,18 @@ header {
 			width: 57%;
 			max-height: 82vh;
 			padding-bottom: 30px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: auto;
+			}
 		}
 
 		#modal-comment > & {
 			width: 733px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: auto;
+			}
 
 			.form {
 				textarea {
@@ -2236,6 +2864,11 @@ header {
 					resize: none;
 					@include radius(3px);
 					margin-bottom: 20px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						height: 132px;
+						margin-bottom: 17px;
+					}
 				}
 
 				.btn-line {
@@ -2247,6 +2880,296 @@ header {
 						padding: 10px;
 						font-size: 12px;
 						font-weight: 400;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+
+		#modal-manage-plan-item > & {
+			width: 733px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: auto;
+			}
+
+			.form {
+				.form-line {
+					@extend %flex-space-between;
+					margin-bottom: 14px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						flex: none;
+						display: block;
+					}
+
+					.fld-holder {
+						width: 48%;
+						margin-left: 4%;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 100%;
+							margin-left: 0;
+							margin-bottom: 14px;
+						}
+
+						&:first-child {
+							margin-left: 0;
+						}
+
+						label {
+							font-size: 12px;
+							color: #5D5D5D;
+							display: block;
+							text-transform: uppercase;
+							margin-bottom: 8px;
+
+							@media (max-width: $adaptive-width-mobile) {
+								font-size: 10px;
+								margin-bottom: 7px;
+							}
+						}
+
+						input[type='text'],
+						input[type='tel'],
+						input[type='email'],
+						input[type='password'],
+						input[type='number'],
+						input[type='search'] {
+							background-color: #fff;
+							height: 45px;
+							width: 100%;
+							@include radius(3px);
+
+							@media (max-width: $adaptive-width-mobile) {
+								height: 40px;
+								padding-top: 14px;
+								padding-left: 13px;
+							}
+						}
+
+						textarea {
+							background-color: #fff;
+							height: 83px;
+							width: 100%;
+							@include radius(3px);
+
+							@media (max-width: $adaptive-width-mobile) {
+								height: 40px;
+								padding-top: 8px;
+								padding-left: 13px;
+								padding-bottom: 8px;
+							}
+						}
+
+						.ui-selectmenu-button {
+							margin-left: 0;
+							width: 100%;
+							height: 45px;
+
+							@media (max-width: $adaptive-width-mobile) {
+								height: 40px;
+								padding-top: 9px;
+								padding-left: 13px;
+							}
+
+							.ui-selectmenu-text {
+								font-size: 16px;
+							}
+						}
+					}
+
+					&.contents {
+						margin-bottom: 28px;
+
+						.fld-holder {
+							width: 100%;
+							margin-left: 0;
+
+							.ui-selectmenu-button {
+								margin-bottom: 18px;
+							}
+						}
+					}
+
+					&.actors {
+						.fld-holder {
+							position: relative;
+
+							@media (max-width: $adaptive-width-mobile) {
+								margin-bottom: 26px;
+							}
+
+							label {
+								margin-bottom: 11px;
+							}
+
+							.action-add {
+								position: absolute;	
+								top: 0;
+								right: 0;
+								font-size: 14px;
+								cursor: pointer;
+								color: $background-color-blue;
+								@extend .transition-color;
+
+								@media (max-width: $adaptive-width-mobile) {
+									font-size: 12px;
+								}
+
+								&:hover {
+									color: lighten(#343464, 25%);
+									@extend .transition-color;
+								}
+							}
+
+							ul {
+								display: block;
+
+								& > li {
+									display: block;
+									padding: 14px 35px 15px 15px;
+									font-size: 16px;
+									margin-bottom: 7px;
+									min-height: 53px;
+									@include box-shadow(0px, 2px, 12px, rgba(165, 174, 177, 0.272956));
+									position: relative;
+
+									.action-remove {
+										position: absolute;
+										top: 4px;
+										right: 0;
+										padding: 16px;
+										width: 13px;
+										height: 13px;
+										box-sizing: content-box;
+										background: url('../../images/ico_remove.svg') no-repeat center;
+										cursor: pointer;
+										@extend .rotate-180-start;
+
+										&:hover {
+											@extend .rotate-180-end;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				.btn-line {
+					text-align: right;
+					font-size: 0;
+
+					.btn {
+						margin-left: 17px;
+						height: 43px;
+						font-size: 12px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							width: 49%;
+							margin-left: 2%;
+
+							&:first-child {
+								margin-left: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		#modal-add-responsible > &,
+		#modal-add-executors > & {
+			width: 733px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: auto;
+			}
+
+			.form {
+				.form-line {
+					margin-bottom: 19px;
+
+					label {
+						font-size: 12px;
+						color: #5D5D5D;
+						display: block;
+						text-transform: uppercase;
+						margin-bottom: 8px;
+
+							@media (max-width: $adaptive-width-mobile) {
+							font-size: 10px;
+							margin-bottom: 7px;
+						}
+					}
+
+					input[type='text'],
+					input[type='tel'],
+					input[type='email'],
+					input[type='password'],
+					input[type='number'],
+					input[type='search'] {
+						background-color: #fff;
+						height: 45px;
+						width: 100%;
+						@include radius(3px);
+
+						@media (max-width: $adaptive-width-mobile) {
+							height: 40px;
+							padding-top: 14px;
+							padding-left: 13px;
+						}
+					}
+				}
+			}
+
+			.js-scroll {
+				margin: 0 -41px 21px;
+			}
+
+			.actors-list {
+				display: block;
+
+				li {
+					display: block;
+					font-size: 14px;
+					padding: 13px 43px 12px;
+					border-bottom: 1px solid #E0E0E0;
+
+					&:first-child {
+						border-top: 1px solid #E0E0E0;
+					}
+
+					.ui-checkboxradio-label {
+						font-size: 14px;
+					}
+
+					.ui-checkboxradio-label {
+						margin-right: 13px;
+					}
+				}
+			}
+
+			.btn-line {
+				text-align: right;
+				font-size: 0;
+
+				.btn {
+					height: 43px;
+					margin-left: 17px;
+					font-size: 12px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 49%;
+						margin-left: 2%;
+
+						&:first-child {
+							margin-left: 0;
+						}
 					}
 				}
 			}
@@ -2259,6 +3182,11 @@ header {
 	.h1 {
 		font-size: 18px;
 		font-weight: 700;
+
+		@media (max-width: $adaptive-width-mobile) {
+			font-size: 16px;
+			padding-right: 100px;
+		}
 
 		&:before {
 			content: '';
@@ -2319,6 +3247,14 @@ header {
 	.chars {
 		margin-bottom: 11px;
 
+		@media (max-width: $adaptive-width-tablet-middle) {
+			margin-bottom: 18px;
+		}
+
+		@media (max-width: $adaptive-width-mobile) {
+			margin-bottom: 11px;
+		}
+
 		ul {
 			display: block;
 			font-size: 0;
@@ -2330,6 +3266,11 @@ header {
 				color: #555;
 				margin-left: 18px;
 
+				@media (max-width: $adaptive-width-tablet-middle) {
+					display: block;
+					margin: 0 0 6px;
+				}
+
 				&:before {
 					content: '';
 					display: inline-block;
@@ -2338,6 +3279,10 @@ header {
 					height: 15px;
 					background-color: #E0E0E0;
 					margin: 0 18px 0 0;
+
+					@media (max-width: $adaptive-width-tablet-middle) {
+						display: none;
+					}
 				}
 
 				&:first-child {
@@ -2368,6 +3313,10 @@ header {
 		padding: 36px 0;
 		border-top: 1px solid #E0E0E0;
 
+		@media (max-width: $adaptive-width-mobile) {
+			padding: 15px 0;
+		}
+
 		h2,
 		.h2 {
 			font-size: 18px;
@@ -2377,6 +3326,10 @@ header {
 
 		&.attachments {
 			padding-top: 27px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				padding-top: 15px;
+			}
 
 			h2,
 			.h2 {
@@ -2388,10 +3341,19 @@ header {
 				border-bottom: 1px solid #C8CBCC;
 				margin-bottom: 29px;
 
+				@media (max-width: $adaptive-width-mobile) {
+					margin-bottom: 10px;
+				}
+
 				ul {
 					li {
 						font-size: 18px;
 						margin-right: 33px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							font-size: 14px;
+							margin-right: 24px;
+						}
 
 						.tab-act {
 							font-weight: 700;
@@ -2405,6 +3367,10 @@ header {
 				font-size: 0;
 				margin: 0 0 27px -16px;
 
+				@media (max-width: $adaptive-width-mobile) {
+					margin: 0 0 15px -13px;
+				}
+
 				li {
 					display: inline-block;
 					vertical-align: top;
@@ -2413,6 +3379,12 @@ header {
 					min-height: 40px;
 					color: #7C7C7C;
 
+					@media (max-width: $adaptive-width-mobile) {
+						margin: 0 0 8px 13px;
+						font-size: 12px;
+						min-height: 32px;
+					}
+
 					a {
 						display: block;
 						text-decoration: none;
@@ -2420,6 +3392,10 @@ header {
 						padding: 10px 21px;
 						border: 1px solid #E1E7EB;
 						@include radius(2px);
+
+						@media (max-width: $adaptive-width-mobile) {
+							padding: 6px 10px;
+						}
 					}
 
 					&.active {
@@ -2442,7 +3418,7 @@ header {
 			}
 
 			.plan {
-				padding: 8px 0 20px 19px;
+				padding: 8px 0 20px;
 
 				.plan-table {
 					margin-bottom: 15px;
@@ -2487,6 +3463,7 @@ header {
 							.ui-checkboxradio-label {
 								font-size: 14px;
 								color: #252525;
+								white-space: nowrap;
 							}
 
 							.boss {
@@ -2525,6 +3502,10 @@ header {
 		max-width: 703px;
 		margin-bottom: 50px;
 
+		@media (max-width: $adaptive-width-mobile) {
+			margin-bottom: 27px;
+		}
+
 		.fld-holder {
 			margin-bottom: 24px;
 
@@ -2534,6 +3515,11 @@ header {
 				display: block;
 				text-transform: uppercase;
 				margin-bottom: 8px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					font-size: 10px;
+					margin-bottom: 6px;
+				}
 			}
 
 			input[type='text'],
@@ -2546,6 +3532,10 @@ header {
 				height: 45px;
 				width: 100%;
 				@include radius(3px);
+
+				@media (max-width: $adaptive-width-mobile) {
+					height: 40px;
+				}
 			}
 
 			textarea {
@@ -2560,6 +3550,10 @@ header {
 				width: 100%;
 				height: 45px;
 
+				@media (max-width: $adaptive-width-mobile) {
+					height: 40px;
+				}
+
 				.ui-selectmenu-text {
 					font-size: 16px;
 				}
@@ -2570,12 +3564,24 @@ header {
 					display: inline-block;
 					vertical-align: middle;
 					max-width: 311px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						display: block;
+						width: 100%;
+						max-width: none;
+						margin-bottom: 9px;
+					}
 				}
 
 				.date {
 					display: inline-block;
 					vertical-align: middle;
 					margin-left: 25px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						display: block;
+						margin: 0;
+					}
 
 					strong {
 						font-weight: 600;
@@ -2603,6 +3609,10 @@ header {
 						text-transform: uppercase;
 						text-align: left;
 						border-bottom: 1px solid #E0E0E0;
+
+						@media (max-width: $adaptive-width-mobile) {
+							padding-bottom: 0;
+						}
 
 						&:first-child {
 							padding-left: 0;
@@ -2657,9 +3667,24 @@ header {
 			.btn-line {
 				font-size: 0;
 
+				@media (max-width: $adaptive-width-mobile) {
+					margin: 0;
+				}
+
 				.btn {
+					font-size: 14px;
 					margin-right: 15px;
 					padding: 12px 16px 11px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 48%;
+						margin: 0 0 0 4%;
+						padding: 12px 10px 11px;
+
+						&:first-child {
+							margin-left: 0;
+						}
+					}
 				}
 			}
 		}
@@ -2669,13 +3694,32 @@ header {
 				font-size: 12px;
 				font-weight: 400;
 				height: 43px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					margin: 50px 0 0;
+					width: 100%;
+				}
 			}
 
 			.actions-right {
+				font-size: 0;
 				margin: -42px 0 20px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					margin: -97px 0 80px;
+				}
 
 				.btn {
 					margin-left: 13px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 48%;
+						margin: 0 0 0 4%;
+
+						&:first-child {
+							margin-left: 0;
+						}
+					}
 				}
 			}
 		}
