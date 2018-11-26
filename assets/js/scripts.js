@@ -1,6 +1,6 @@
 var __widthMobile = 1000;
 var __widthMobileTablet = 1000;
-var __widthMobileTabletMiddle = 760;
+var __widthMobileTabletMiddle = 850;
 var __widthMobileSmall = 540;
 var __isMobile = ($(window).width() <= __widthMobile);
 var __isMobileTablet = ($(window).width() <= __widthMobileTablet);
@@ -227,10 +227,10 @@ function parseUrl(url) {
 	return parser;
 } 
 
-function showModal(modal_id) {
+function showModal(modal_id, dontHideOthers) {
 	var $modal = $('#' + modal_id);
 
-	$('.modal-wrapper:visible').not($modal).attr('data-transparent', true).stop().animate({'opacity': 0}, __animationSpeed);
+	if (typeof(dontHideOthers) == 'undefined' || !dontHideOthers) $('.modal-wrapper:visible').not($modal).attr('data-transparent', true).stop().animate({'opacity': 0}, __animationSpeed);
 
 	$('.modal-fadeout').stop().fadeIn(300);
 	$modal.stop().fadeIn(450).css({
@@ -261,6 +261,20 @@ function hideModal(sender, onlyModal) {
 	} else {
 		$modal.stop().fadeOut(450);
 	}
+}
+function showModalConfirm(header, btn, action) {
+	if (typeof(header) != 'undefined' && header) $('#modal-confirm>.modal>.contents>h1').text(header);
+	if (typeof(btn) != 'undefined' && btn) $('#modal-confirm-action-btn').text(btn);
+	if (typeof(action) == 'function') {
+		$('#modal-confirm-action-btn').click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+
+			action();
+			hideModal(this, $('.modal-wrapper:visible').length > 1);
+		});
+	}
+	showModal('modal-confirm', true);
 }
 
 function scrollInit(block) {
@@ -506,18 +520,6 @@ function _scrollTo(target, offset) {
 			threshold: 25
 		});
 
-		// HEADER SEARCH
-		$('#bl-controls .search').submit(function() {
-			if (!__isMobileSmall) {
-				if ($(this).find('input:text').val()) {
-					return true;
-				}
-			} else {
-				window.location.href = 'phonebook.html';
-			}
-			return false;
-		});
-
 		// MAILER
 		if ($('#doc-list').length) {
 			$('#doc-list>ul>li>.attachment>a').click(function(e) {
@@ -541,7 +543,7 @@ function _scrollTo(target, offset) {
 					$(this).addClass('active').siblings().removeClass('active');
 				}
 
-				if (__isMobileSmall) {
+				if (__isMobileTabletMiddle) {
 					$('.mailer .cols-holder>.side-col').hide();
 					$('.mailer').addClass('nopadd');
 					$('.mailer .bread-crumbs').stop().slideUp(__animationSpeed);
@@ -554,7 +556,7 @@ function _scrollTo(target, offset) {
 
 			// FIXME DEMO MOBILE
 			window.addEventListener('popstate', function(e) {
-				if (__isMobileSmall && $('.mailer').data('mobile-main-triggered')) {
+				if (__isMobileTabletMiddle && $('.mailer').data('mobile-main-triggered')) {
 					$('.mailer').removeClass('nopadd');
 					$('.mailer .bread-crumbs').stop().slideDown(__animationSpeed).next('.holder').stop().slideDown(__animationSpeed);
 					$('.mailer .cols-holder>.side-col').show();
@@ -565,13 +567,18 @@ function _scrollTo(target, offset) {
 
 		}
 		if ($('#doc-body .attachments').length) {
+			if (!PDFObject.supportsPDFs) {
+				$('#doc-body .attachments .menu>li>a.embed').removeClass('embed');
+				$('#doc-body .attachments').append('<div class="pdf-warning">Ваш браузер не поддерживает просмотр PDF-файлов</div>');
+			}
+
 			$('#doc-body .attachments .menu>li>a.embed').click(function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 
 				if (!$(this).parent().hasClass('active')) {
 					if ($(this).attr('href') && $(this).attr('href') != '#' && $(this).hasClass('embed')) {
-						PDFObject.embed($(this).attr('href'), '#doc-body .attachments #attachment-frame');
+						var res = PDFObject.embed($(this).attr('href'), '#doc-body .attachments #attachment-frame');
 						$('#doc-body .attachments #attachment-frame').stop().slideDown(__animationSpeed);
 					} else {
 						$('#doc-body .attachments #attachment-frame').stop().slideUp(__animationSpeed);
@@ -636,11 +643,11 @@ function _scrollTo(target, offset) {
 			// FIXME
 			$('#plan-delete-item').click(function() {
 				$('#doc-body .plan .plan-table input:checkbox:checked').each(function(index, item) {
-					if (confirm('Вы уверены, что хотите удалить записи?')) {
+					showModalConfirm('Вы уверены, что хотите удалить записи?', 'Удалить', function() {
 						$(item).closest('tr').stop().slideUp(__animationSpeed, function() {
 							$(this).remove();
 						});
-					}
+					});
 				});
 			});
 
@@ -653,45 +660,27 @@ function _scrollTo(target, offset) {
 			});
 
 			$('#add-plan-item-add-responsible').click(function() {
-				/*
-				$('#add-plan-item-responsible-list').append('<li><span></span><span class="action-remove"></span></li>');
-				$('#add-plan-item-responsible-list li:last .action-remove').click(function() {
-					if (confirm('Вы уверены, что хотите удалить запись?')) {
-						$(this).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
-							$(this).remove();
-						});
-					}
-				});
-				*/
 				showModal('modal-add-responsible');
 			});
 			$('#add-plan-item-responsible-list>li .action-remove').click(function() {
-				if (confirm('Вы уверены, что хотите удалить запись?')) {
-					$(this).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
-						$(this).remove();
+				var that = this;
+				showModalConfirm('Вы уверены, что хотите удалить запись?', 'Удалить', function() {
+					$(that).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
+						$(that).remove();
 					});
-				}				
+				});		
 			});
 
 			$('#add-plan-item-add-executors').click(function() {
-				/*
-				$('#add-plan-item-executors-list').append('<li><span></span><span class="action-remove"></span></li>');
-				$('#add-plan-item-executors-list li:last .action-remove').click(function() {
-					if (confirm('Вы уверены, что хотите удалить запись?')) {
-						$(this).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
-							$(this).remove();
-						});
-					}
-				});
-				*/
 				showModal('modal-add-executors');
 			});
 			$('#add-plan-item-executors-list>li .action-remove').click(function() {
-				if (confirm('Вы уверены, что хотите удалить запись?')) {
-					$(this).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
-						$(this).remove();
+				var that = this;
+				showModalConfirm('Вы уверены, что хотите удалить запись?', 'Удалить', function() {
+					$(that).closest('li').stop().fadeOut(__animationSpeed*0.5, function() {
+						$(that).remove();
 					});
-				}
+				});	
 			});
 
 			$('#doc-body .plan').swipe({

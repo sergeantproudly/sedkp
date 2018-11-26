@@ -1918,6 +1918,21 @@ header {
 						box-shadow: 0px 2px 13px rgba(172, 172, 172, 0.5);
 					}
 
+					.pdf-warning {
+						font-size: 14px;
+						color: #808080;
+						background: url('../../images/ico_warning.svg') no-repeat top left;
+						padding: 1px 0 0 28px;
+						min-height: 20px;
+						margin-top: -12px;
+
+						@media (max-width: $adaptive-width-mobile) {
+							font-size: 12px;
+							background-size: 17px 17px;
+							padding-right: 25px;
+						}
+					}
+
 					.actions-right {
 						margin-top: -10px;
 						margin-bottom: -30px;
@@ -3169,6 +3184,50 @@ header {
 
 						&:first-child {
 							margin-left: 0;
+						}
+					}
+				}
+			}
+		}
+
+		#modal-confirm > & {
+			width: 399px;
+			text-align: center;
+			padding: 46px 37px 56px;
+			box-shadow: 0px 2px 13px rgba(172, 172, 172, 0.5);
+			vertical-align: middle;
+
+			h1,
+			.h1 {
+				font-size: 21px;
+				line-height: 1.35;
+				margin-bottom: 29px;
+
+				@media (max-width: $adaptive-width-mobile) {
+					font-size: 18px;
+				}
+			}
+
+			.btn-line {
+				font-size: 0;
+
+				.btn {
+					width: 136px;
+					height: 43px;
+					font-size: 12px;
+					font-weight: 400;
+					margin-left: 12px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						display: block;
+						margin: 0 auto 18px;
+					}
+
+					&:first-child {
+						margin-left: 0;
+
+						@media (max-width: $adaptive-width-mobile) {
+							margin-left: auto;
 						}
 					}
 				}
