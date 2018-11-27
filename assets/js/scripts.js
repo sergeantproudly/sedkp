@@ -67,6 +67,10 @@ function initElements(element) {
 
 		// simple select
 		} else {
+			if ($(select).offset().left + 370 > $(window).width()) {
+				$(select).attr('data-pos', 'right');
+			}
+
 			var offset = $(select).attr('data-offset');
 			if ($(select).attr('data-pos') == 'right') {
 				var data = {
@@ -83,6 +87,7 @@ function initElements(element) {
 			data['change'] = function(e, ui) {
 				$(ui.item.element).closest('.input-holder').addClass('focused');
 			}
+			data['appendTo'] = $(select).parent();
 			$(select).selectmenu(data);
 			if ($(select).attr('placeholder')) {
 				$(select).prepend('<option value="" disabled selected>' + data['placeholder'] + '</option>');
@@ -697,15 +702,32 @@ function _scrollTo(target, offset) {
 					}, __animationSpeed, 'easeInOutQuart');
 					if (scroll_value <= 0) $(this).removeClass('scrolled-touched');
 				},
-				swipeDown: function(event, direction, distance) {
-					$(this).stop().animate({
-						scrollTop: '+' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-				},
 				swipeUp: function(event, direction, distance) {
-					$(this).stop().animate({
-						scrollTop: '-' + distance
-					}, __animationSpeed, 'easeInOutQuart');
+					var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
+					var scroll_value = $(this).scrollTop() - 0 + distance;
+
+					if (scroll_value <= scroll_top_max) {
+						$(this).stop().animate({
+							scrollTop: '+' + distance
+						}, __animationSpeed, 'easeInOutQuart');
+					} else {
+						$('#layout').stop().animate({
+							scrollTop: '+' + distance
+						}, __animationSpeed);
+					}
+				},
+				swipeDown: function(event, direction, distance) {
+					var scroll_value = $(this).scrollTop() - distance;
+
+					if (scroll_value >= 0) {
+						$(this).stop().animate({
+							scrollTop: '-' + distance
+						}, __animationSpeed, 'easeInOutQuart');
+					} else {
+						$('#layout').animate({
+							scrollTop: '-' + distance
+						}, __animationSpeed);
+					}
 				},
 				threshold: 25
 			});
