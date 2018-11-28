@@ -52,7 +52,7 @@ function initElements(element) {
 
 	$element.find('select').each(function(i, select) {
 		// editable select
-		if ($(select).attr('editable')) {
+		if (typeof($(select).attr('editable')) != 'undefined' && $(select).attr('editable') !== 'false') {
 			$(select).editableSelect({ 
 				effects: 'fade',
 				source: $(select).attr('source') ? $(select).attr('source') : false
