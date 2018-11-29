@@ -363,6 +363,28 @@ function fadeoutInit(node) {
 	});
 }
 
+function editableSelectReinit(select) {
+	if (typeof(select) == 'string') var $select = $('#' + select);
+	else $select = $(select);
+
+	var id = $select.attr('id');
+	$('#' + id + '_es').remove();
+	$select.data('editable-select', false);
+	$select.editableSelect({ 
+		effects: 'fade',
+		source: $select.attr('source') ? $select.attr('source') : false
+	}).on('change.editable-select', function(e) {
+		var $holder = $(e.target).closest('.input-holder');
+		if ($holder.find('.es-input').val()) {
+			$(e.target).closest('.input-holder').addClass('focused');
+		} else {
+			$(e.target).closest('.input-holder').removeClass('focused');
+		}
+	});
+	$('#' + id + '_input').show();
+	return true;
+}
+
 function getOffsetSum(elem) {
 	var t = 0, l = 0;
 	while (elem) {

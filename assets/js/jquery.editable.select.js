@@ -25,6 +25,8 @@
 		// create text input
 		//this.$select.replaceWith(this.$input);
 		//this.$list.appendTo(this.options.appendTo || this.$input.parent());
+		var id = this.$select.attr('id');
+		this.$wrapper.attr('id', id + '_es');
 		this.$select.after(this.$wrapper);
 		this.$input.appendTo(this.options.appendTo || this.$wrapper);
 		this.$list.appendTo(this.options.appendTo || this.$wrapper);
