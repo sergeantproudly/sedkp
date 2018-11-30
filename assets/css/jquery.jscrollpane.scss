@@ -23,7 +23,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 35px;
+	width: 1px;
 }
 
 .jspHorizontalBar
@@ -55,12 +55,19 @@
 .jspDrag
 {
 	background: #B1B1BA;
+	opacity: 0.45;
 	cursor: pointer;
-	left: 14px;
+	left: -16px;
 	position: relative;
 	top: 0;
-	width: 9px;
+	width: 7px;
 	@include radius(5px);
+	@extend .transition-opacity;
+
+	&:hover {
+		opacity: 1;
+		@extend .transition-opacity;
+	}
 }
 
 .jspHorizontalBar .jspTrack,
