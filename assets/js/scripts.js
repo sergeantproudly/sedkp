@@ -287,6 +287,16 @@ function hideModal(sender, onlyModal) {
 		$modal.stop().fadeOut(450);
 	}
 }
+
+function closeModal(sender) {
+	if ($('.modal-wrapper:visible').length > 1) {
+		$('.modal-wrapper[data-transparent]').stop().animate({'opacity': 1}, __animationSpeed);
+		hideModal(sender, true);
+	} else {
+		hideModal(sender, false);
+	}
+}
+
 function showModalConfirm(header, btn, action) {
 	if (typeof(header) != 'undefined' && header) $('#modal-confirm>.modal>.contents>h1').text(header);
 	if (typeof(btn) != 'undefined' && btn) $('#modal-confirm-action-btn').text(btn);
