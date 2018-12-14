@@ -896,6 +896,7 @@ header {
 
 				@media (max-width: $adaptive-width-mobile) {
 					display: block;
+					position: fixed;
 					top: 100vh;
 					left: $padding-edges-mobile;
 					right: auto;

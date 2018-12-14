@@ -81,7 +81,7 @@ function initElements(element) {
 					position: {my : "left"+(offset?"+"+offset:"")+" top-2"}
 				}
 			}
-			if ($(select).attr('placeholder')) {
+			if (typeof($(select).attr('placeholder')) != 'undefined') {
 				data['placeholder'] = $(select).attr('placeholder');
 			}
 			data['change'] = function(e, ui) {
@@ -89,7 +89,7 @@ function initElements(element) {
 			}
 			data['appendTo'] = $(select).parent();
 			$(select).selectmenu(data);
-			if ($(select).attr('placeholder')) {
+			if (typeof($(select).attr('placeholder')) != 'undefined') {
 				$(select).prepend('<option value="" disabled selected>' + data['placeholder'] + '</option>');
 			}
 		}
