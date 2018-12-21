@@ -143,11 +143,13 @@ function initElements(element) {
 	});
 
 	$('body').mouseup(function(e) {
+		/*
 		if ($('.modal-fadeout').css('display') == 'block' && !$('html').hasClass('html-mobile-opened')) {
 			if (!$(e.target).closest('.contents').length && !$(e.target).closest('.ui-selectmenu-menu').length && !$(e.target).closest('.ui-datepicker').length) {
 				hideModal();
 			}
 		}
+		*/
 		if ($('html').hasClass('html-mobile-opened')) {
 			if (!$(e.target).closest('.menu-holder').length) {
 				$('nav .close').click();
