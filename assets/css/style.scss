@@ -896,7 +896,6 @@ header {
 
 				@media (max-width: $adaptive-width-mobile) {
 					display: block;
-					position: fixed;
 					top: 100vh;
 					left: $padding-edges-mobile;
 					right: auto;
@@ -912,6 +911,14 @@ header {
 						font-size: 16px;
 						opacity: 1;
 					}
+				}
+			}
+
+			.html-mobile-opened.html-mobile-long & {
+				@media (max-width: $adaptive-width-mobile) {
+					position: absolute;
+					top: auto;
+					bottom: 50px;
 				}
 			}
 		}

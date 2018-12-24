@@ -58,7 +58,7 @@
 				var $list = that.$list;
 				$list.find('li').not('.other-option').remove();
 				$.each(response, function(index, item) {
-					$list.prepend('<li value="' + item.value + '">' + item.label + '</li>');
+					$list.prepend('<li value="' + item.value + '">' + item.name + '</li>');
 				});
 				$list.find('li').addClass('es-visible').show();
 				if ($list.find('li').not('.other-option').length) {
@@ -84,16 +84,16 @@
 
 			// FIXME TEST
 			var response = [
-				{'label': "ОАО \"АВТОБАЗА\"", 'value': 1},
-				{'label': "ОАО \"АВТОБЫТСЕРВИС\"", 'value': 2},
-				{'label': "ОАО \"АВТОВАЗ\"", 'value': 3},
-				{'label': "ОАО \"АВТОВОКЗАЛ\"", 'value': 4},
-				{'label': "ОАО \"АВТОВОКЗАЛ2\"", 'value': 5},
-				{'label': "ОАО \"АВТОБАЗА2\"", 'value': 6},
-				{'label': "ОАО \"АВТОГАЗСТРОЙ\"", 'value': 7},
-				{'label': "ОАО \"АВТОГЕН\"", 'value': 8},
-				{'label': "ОАО \"АГП\"", 'value': 9},
-				{'label': "ОАО \"ГРЕЙС\"", 'value': 10}
+				{'name': "ОАО \"АВТОБАЗА\"", 'value': 1},
+				{'name': "ОАО \"АВТОБЫТСЕРВИС\"", 'value': 2},
+				{'name': "ОАО \"АВТОВАЗ\"", 'value': 3},
+				{'name': "ОАО \"АВТОВОКЗАЛ\"", 'value': 4},
+				{'name': "ОАО \"АВТОВОКЗАЛ2\"", 'value': 5},
+				{'name': "ОАО \"АВТОБАЗА2\"", 'value': 6},
+				{'name': "ОАО \"АВТОГАЗСТРОЙ\"", 'value': 7},
+				{'name': "ОАО \"АВТОГЕН\"", 'value': 8},
+				{'name': "ОАО \"АГП\"", 'value': 9},
+				{'name': "ОАО \"ГРЕЙС\"", 'value': 10}
 			];
 			if (typeof(that.tid) != 'undefined') clearTimeout(that.tid);
 			that.tid = setTimeout(function() {
