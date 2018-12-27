@@ -205,28 +205,33 @@ function initElements(element) {
 
 	fadeoutInit();
 }
+
+function docListPos() {
+	if ($('#doc-list').data('inited')) {
+		$('#doc-list').jScrollPane().data('jsp').destroy();
+		$('#doc-list')
+			.removeClass('overflow')
+			.removeAttr('data-max-height')
+			.removeData('inited')
+			.css({
+				'max-height': 'none',
+			});
+	}
+	var freespace = Math.max($(window).height(), ($('#doc-body').height() + $('#doc-body').offset().top)) - $('#doc-list').offset().top;
+	if ($('#doc-list').outerHeight() > freespace) {
+		$('#doc-list').addClass('overflow').attr('data-max-height', freespace);
+		scrollInit($('#doc-list'));
+	}
+}
+
 function onResize() {
 	__isMobile = ($(window).width() <= __widthMobile);
 	__isMobileTablet = ($(window).width() <= __widthMobileTablet);
 	__isMobileTabletMiddle = ($(window).width() <= __widthMobileTabletMiddle);
 
 	if ($('#doc-list').length) {
-		if ($('#doc-list').data('inited')) {
-			$('#doc-list').jScrollPane().data('jsp').destroy();
-			$('#doc-list')
-				.removeClass('overflow')
-				.removeAttr('data-max-height')
-				.removeData('inited')
-				.css({
-					'max-height': 'none',
-				});
-		}
 		if (!__isMobileTabletMiddle) {
-			var freespace = $(window).height() - $('#doc-list').offset().top;
-			if ($('#doc-list').outerHeight() > freespace) {
-				$('#doc-list').addClass('overflow').attr('data-max-height', freespace);
-				scrollInit($('#doc-list'));
-			}
+			docListPos()
 		}
 	}
 
@@ -583,11 +588,7 @@ function _scrollTo(target, offset) {
 		// MAILER
 		if ($('#doc-list').length) {
 			if (!__isMobileTabletMiddle) {
-				var freespace = $(window).height() - $('#doc-list').offset().top;
-				if ($('#doc-list').outerHeight() > freespace) {
-					$('#doc-list').addClass('overflow').attr('data-max-height', freespace);
-					scrollInit($('#doc-list'));
-				}
+				docListPos();
 			}
 
 			$('#doc-list>ul>li>.attachment>a').click(function(e) {
@@ -647,9 +648,17 @@ function _scrollTo(target, offset) {
 				if (!$(this).parent().hasClass('active')) {
 					if ($(this).attr('href') && $(this).attr('href') != '#' && $(this).hasClass('embed')) {
 						var res = PDFObject.embed($(this).attr('href'), '#doc-body .attachments #attachment-frame');
-						$('#doc-body .attachments #attachment-frame').stop().slideDown(__animationSpeed);
+						$('#doc-body .attachments #attachment-frame').stop().slideDown(__animationSpeed, function() {
+							if (!__isMobileTabletMiddle) {
+								docListPos();
+							}
+						});
 					} else {
-						$('#doc-body .attachments #attachment-frame').stop().slideUp(__animationSpeed);
+						$('#doc-body .attachments #attachment-frame').stop().slideUp(__animationSpeed, function() {
+							if (!__isMobileTabletMiddle) {
+								docListPos();
+							}
+						});
 					}
 
 					$(this).parent().addClass('active').siblings('li').removeClass('active');
