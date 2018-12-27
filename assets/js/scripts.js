@@ -375,24 +375,38 @@ function fadeoutInit(node) {
 			var holderWidth = $(block).width();
 			if (w_child > holderWidth && (!maxWidth || $(window).width() <= maxWidth)) {
 				$(block).addClass('fadeout').removeClass('nowrap').swipe({
-					swipeLeft: function(event, direction, distance) {
-						var scroll_value = $(this).scrollLeft();
-						var scroll_max = $(this).prop('scrollWidth') - $(this).width();
-						var scroll_value_new = scroll_value - 0 + distance;
-						$(this).stop().animate({
-							scrollLeft: '+' + distance
-						}, __animationSpeed, 'easeInOutQuart');
-						if (scroll_value_new >= scroll_max) $(this).addClass('scrolled-full');
-						else $(this).removeClass('scrolled-full')
+					swipeStatus: function(event, phase, direction, distance) {
+						var offset = distance;
+
+						if (phase === $.fn.swipe.phases.PHASE_START) {
+							var origPos = $(this).scrollLeft();
+							$(this).data('origPos', origPos);
+
+						} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
+							var origPos = $(this).data('origPos');
+
+							if (direction == 'left') {
+								var scroll_max = $(this).prop('scrollWidth') - $(this).width();
+								var scroll_value_new = origPos - 0 + offset;
+								$(this).scrollLeft(scroll_value_new);
+								if (scroll_value_new >= scroll_max) $(this).addClass('scrolled-full');
+								else $(this).removeClass('scrolled-full');
+
+							} else if (direction == 'right') {
+								var scroll_value_new = origPos - offset;
+								$(this).scrollLeft(scroll_value_new);
+								$(this).removeClass('scrolled-full');
+							}
+
+						} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
+							var origPos = $(this).data('origPos');
+							$(this).scrollLeft(origPos);
+
+						} else if (phase === $.fn.swipe.phases.PHASE_END) {
+							$(this).data('origPos', $(this).scrollLeft());
+						}
 					},
-					swipeRight: function(event, direction, distance) {
-						var scroll_value = $(this).scrollLeft();
-						$(this).stop().animate({
-							scrollLeft: '-' + distance
-						}, __animationSpeed, 'easeInOutQuart');
-						$(this).removeClass('scrolled-full');
-					},
-					threshold: 25
+					threshold: 70
 				});
 			} else {
 				$(block).removeClass('fadeout');
@@ -496,24 +510,38 @@ function _scrollTo(target, offset) {
             });	
 
             $(tabs).swipe({
-				swipeLeft: function(event, direction, distance) {
-					var scroll_value = $(this).scrollLeft();
-					var scroll_max = $(this).prop('scrollWidth') - $(this).width();
-					var scroll_value_new = scroll_value - 0 + distance;
-					$(this).stop().animate({
-						scrollLeft: '+' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-					if (scroll_value_new >= scroll_max) $(this).addClass('scrolled-full');
-					else $(this).removeClass('scrolled-full')
+				swipeStatus: function(event, phase, direction, distance) {
+					var offset = distance;
+
+					if (phase === $.fn.swipe.phases.PHASE_START) {
+						var origPos = $(this).scrollLeft();
+						$(this).data('origPos', origPos);
+
+					} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
+						var origPos = $(this).data('origPos');
+
+						if (direction == 'left') {
+							var scroll_max = $(this).prop('scrollWidth') - $(this).width();
+							var scroll_value_new = origPos - 0 + offset;
+							$(this).scrollLeft(scroll_value_new);
+							if (scroll_value_new >= scroll_max) $(this).addClass('scrolled-full');
+							else $(this).removeClass('scrolled-full');
+
+						} else if (direction == 'right') {
+							var scroll_value_new = origPos - offset;
+							$(this).scrollLeft(scroll_value_new);
+							$(this).removeClass('scrolled-full');
+						}
+
+					} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
+						var origPos = $(this).data('origPos');
+						$(this).scrollLeft(origPos);
+
+					} else if (phase === $.fn.swipe.phases.PHASE_END) {
+						$(this).data('origPos', $(this).scrollLeft());
+					}
 				},
-				swipeRight: function(event, direction, distance) {
-					var scroll_value = $(this).scrollLeft();
-					$(this).stop().animate({
-						scrollLeft: '-' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-					$(this).removeClass('scrolled-full');
-				},
-				threshold: 25
+				threshold: 70
 			});	
         };
 
@@ -556,33 +584,42 @@ function _scrollTo(target, offset) {
 			}
 		});
 		$('header .menu-holder').swipe({
-			swipeDown: function(event, direction, distance) {
+			swipeStatus: function(event, phase, direction, distance) {
 				if (__isMobile && $('html').hasClass('html-mobile-opened')) {
-					var scrollValue = $(this).scrollTop() - distance;
+					var offset = distance;
 
-					$(this).stop().animate({
-						scrollTop: '-' + distance
-					}, __animationSpeed, 'easeInOutQuart');
+					if (phase === $.fn.swipe.phases.PHASE_START) {
+						var origPos = $(this).scrollLeft();
+						$(this).data('origPos', origPos);
 
-					if (scrollValue <= 0) {
-						$('#menu-main>.close').stop().fadeIn(__animationSpeed*0.3);
+					} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
+						var origPos = $(this).data('origPos');
+
+						if (direction == 'up') {
+							var scroll_value_new = origPos - 0 + offset;
+							$(this).scrollTop(scroll_value_new);
+							if (scroll_value_new <= 0) {
+								$('#menu-main>.close').stop().fadeIn(__animationSpeed*0.3);
+							}
+
+						} else if (direction == 'down') {
+							var scroll_value_new = origPos - offset;
+							$(this).scrollTop(scroll_value_new);
+							if (scrollValue > 0) {
+								$('#menu-main>.close').stop().fadeOut(__animationSpeed*0.3);
+							}
+						}
+
+					} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
+						var origPos = $(this).data('origPos');
+						$(this).scrollTop(origPos);
+
+					} else if (phase === $.fn.swipe.phases.PHASE_END) {
+						$(this).data('origPos', $(this).scrollTop());
 					}
-				}				
+				}
 			},
-			swipeUp: function(event, direction, distance) {
-				if (__isMobile && $('html').hasClass('html-mobile-opened')) {
-					var scrollValue = $(this).scrollTop() - 0 + distance;
-
-					$(this).stop().animate({
-						scrollTop: '+' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-
-					if (scrollValue > 0) {
-						$('#menu-main>.close').stop().fadeOut(__animationSpeed*0.3);
-					}
-				}		
-			},
-			threshold: 25
+			threshold: 70
 		});
 
 		// MAILER
@@ -761,47 +798,62 @@ function _scrollTo(target, offset) {
 			});
 
 			$('#doc-body .plan').swipe({
-				swipeLeft: function(event, direction, distance) {
-					$(this).stop().animate({
-						scrollLeft: '+' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-					$(this).addClass('scrolled-touched');
-				},
-				swipeRight: function(event, direction, distance) {
-					var scroll_value = $(this).scrollLeft() - distance;
-					$(this).stop().animate({
-						scrollLeft: '-' + distance
-					}, __animationSpeed, 'easeInOutQuart');
-					if (scroll_value <= 0) $(this).removeClass('scrolled-touched');
-				},
-				swipeUp: function(event, direction, distance) {
-					var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
-					var scroll_value = $(this).scrollTop() - 0 + distance;
+				swipeStatus: function(event, phase, direction, distance) {
+					var offset = distance;
 
-					if (scroll_value <= scroll_top_max) {
-						$(this).stop().animate({
-							scrollTop: '+' + distance
-						}, __animationSpeed, 'easeInOutQuart');
-					} else {
-						$('#layout').stop().animate({
-							scrollTop: '+' + distance
-						}, __animationSpeed);
+					if (phase === $.fn.swipe.phases.PHASE_START) {
+						var origPosH = $(this).scrollLeft();
+						var origPosV = $(this).scrollTop();
+						$(this).data('origPosH', origPosH);
+						$(this).data('origPosV', origPosV);
+
+					} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
+						var origPosH = $(this).data('origPosH');
+						var origPosV = $(this).data('origPosV');
+
+						if (direction == 'left') {
+							var scroll_value_new = origPosH - 0 + offset;
+							$(this).scrollLeft(scroll_value_new);
+							$(this).addClass('scrolled-touched');
+
+						} else if (direction == 'right') {
+							var scroll_value_new = origPosH - offset;
+							$(this).scrollLeft(scroll_value_new);
+							if (scroll_value <= 0) $(this).removeClass('scrolled-touched');
+
+						} else if (direction == 'up') {
+							var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
+							var scroll_value = origPosV - 0 + distance;
+
+							if (scroll_value <= scroll_top_max) {
+								$(this).scrollTop(scroll_value);
+							} else {
+								$('#layout').scrollTop(scroll_value);
+							}
+
+						} else if (direction == 'down') {
+							var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
+							var scroll_value = origPosV - distance;
+
+							if (scroll_value <= scroll_top_max) {
+								$(this).scrollTop(scroll_value);
+							} else {
+								$('#layout').scrollTop(scroll_value);
+							}
+						}
+
+					} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
+						var origPosH = $(this).data('origPosH');
+						var origPosV = $(this).data('origPosV');
+						$(this).scrollLeft(origPosH);
+						$(this).scrollTop(origPosV);
+
+					} else if (phase === $.fn.swipe.phases.PHASE_END) {
+						$(this).data('origPosH', $(this).scrollLeft());
+						$(this).data('origPosV', $(this).scrollTop());
 					}
 				},
-				swipeDown: function(event, direction, distance) {
-					var scroll_value = $(this).scrollTop() - distance;
-
-					if (scroll_value >= 0) {
-						$(this).stop().animate({
-							scrollTop: '-' + distance
-						}, __animationSpeed, 'easeInOutQuart');
-					} else {
-						$('#layout').animate({
-							scrollTop: '-' + distance
-						}, __animationSpeed);
-					}
-				},
-				threshold: 25
+				threshold: 70
 			});
 		}
 
