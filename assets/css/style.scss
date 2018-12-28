@@ -1591,6 +1591,12 @@ header {
 			.docs-list {
 				&.overflow {
 					overflow: hidden;
+
+					& > .jspContainer {
+						& > .jspPane {
+							left: 0 !important;
+						}
+					}
 				}
 
 				ul {
