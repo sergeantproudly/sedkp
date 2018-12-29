@@ -804,12 +804,15 @@ function _scrollTo(target, offset) {
 					if (phase === $.fn.swipe.phases.PHASE_START) {
 						var origPosH = $(this).scrollLeft();
 						var origPosV = $(this).scrollTop();
+						var origPosVLayout = $('#layout').scrollTop()
 						$(this).data('origPosH', origPosH);
 						$(this).data('origPosV', origPosV);
+						$(this).data('origPosVLayout', origPosVLayout);
 
 					} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
 						var origPosH = $(this).data('origPosH');
 						var origPosV = $(this).data('origPosV');
+						var origPosVLayout = $(this).data('origPosVLayout');
 
 						if (direction == 'left') {
 							var scroll_value_new = origPosH - 0 + offset;
@@ -823,7 +826,7 @@ function _scrollTo(target, offset) {
 
 						} else if (direction == 'up') {
 							var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
-							var scroll_value = origPosV - 0 + distance;
+							var scroll_value = origPosV - 0 + offset;
 
 							if (scroll_value <= scroll_top_max) {
 								$(this).scrollTop(scroll_value);
@@ -832,12 +835,12 @@ function _scrollTo(target, offset) {
 							}
 
 						} else if (direction == 'down') {
-							var scroll_top_max = $(this)[0].scrollHeight - $(this).outerHeight();
-							var scroll_value = origPosV - distance;
+							var scroll_value = origPosV - offset;
 
-							if (scroll_value <= scroll_top_max) {
+							if (scroll_value > 0) {
 								$(this).scrollTop(scroll_value);
 							} else {
+								var scroll_value = origPosVLayout - offset;
 								$('#layout').scrollTop(scroll_value);
 							}
 						}
@@ -845,12 +848,14 @@ function _scrollTo(target, offset) {
 					} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
 						var origPosH = $(this).data('origPosH');
 						var origPosV = $(this).data('origPosV');
+						var origPosVLayout = $(this).data('origPosVLayout');
 						$(this).scrollLeft(origPosH);
 						$(this).scrollTop(origPosV);
 
 					} else if (phase === $.fn.swipe.phases.PHASE_END) {
 						$(this).data('origPosH', $(this).scrollLeft());
 						$(this).data('origPosV', $(this).scrollTop());
+						$(this).data('origPosVLayout', $('#layout').scrollTop());
 					}
 				},
 				threshold: 70
