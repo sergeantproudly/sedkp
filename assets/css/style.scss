@@ -1921,6 +1921,28 @@ header {
 						margin: 0;
 					}
 
+					&.ln3 {
+						width: 50%;
+
+						@media (max-width: $adaptive-width-desktop-small) {
+							width: 100%;
+							min-width: 0;
+							margin: 20px 0;
+							text-align: left;
+						}
+
+						.btn {
+							margin-bottom: 8px;
+
+							&.type5 {
+								@media (max-width: $adaptive-width-mobile) {
+									width: 100%;
+									margin-left: 0;
+								}
+							}
+						}
+					}
+
 					.btn {
 						padding: 8px 20px 9px;
 						font-size: 12px;
@@ -3340,6 +3362,102 @@ header {
 
 						@media (max-width: $adaptive-width-mobile) {
 							margin-left: auto;
+						}
+					}
+				}
+			}
+		}
+
+		#modal-sign > & {
+			width: 733px;
+
+			@media (max-width: $adaptive-width-mobile) {
+				width: auto;
+			}
+
+			.js-scroll {
+				margin-bottom: 20px;
+			}
+
+			table {
+				tr {
+					th {
+						padding: 0 16px 8px;
+						font-size: 11px;
+						color: #797979;
+						text-transform: uppercase;
+						vertical-align: bottom;
+						border-bottom: 1px solid #E0E0E0;
+
+						&:first-child {
+							padding-left: 0;
+						}
+
+						&:last-child {
+							padding-left: 0;
+						}
+					}
+
+					td {
+						padding: 10px 16px 15px;
+						font-size: 12px;
+						border-bottom: 1px solid #E0E0E0;
+
+						&:first-child {
+							padding-left: 0;
+						}
+
+						&:last-child {
+							padding-left: 0;
+						}
+
+						.order {
+							font-weight: 600;
+							color: #000;
+							font-size: 14px;
+							display: block;
+							margin-bottom: 8px;
+						}
+
+						strong {
+							font-weight: 600;
+							color: #000;
+						}
+
+						ol {
+							counter-reset: signCounter;
+
+							li {
+								margin-bottom: 6px;
+
+								&:before {
+									counter-increment: signCounter;
+  									content: counter(signCounter) ".";
+  									color: #999;
+  									display: inline-block;
+  									margin-right: 4px;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.btn-line {
+				text-align: right;
+				font-size: 0;
+
+				.btn {
+					height: 43px;
+					margin-left: 17px;
+					font-size: 12px;
+
+					@media (max-width: $adaptive-width-mobile) {
+						width: 49%;
+						margin-left: 2%;
+
+						&:first-child {
+							margin-left: 0;
 						}
 					}
 				}

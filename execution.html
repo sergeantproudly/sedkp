@@ -129,8 +129,8 @@
 							<h2>Общая часть: очень срочно!</h2>
 							<div class="date">Дата резолюции 12.11.2018</div>
 
-							<div class="actions-right">
-								<button class="btn">Ознакомлен</button><button class="btn">Добавить резолюцию</button>
+							<div class="actions-right ln3">
+								<button class="btn">Ознакомлен</button><button class="btn">Добавить резолюцию</button><button class="btn type5" onclick="showModal('modal-sign');">Роспись</button>
 							</div>
 
 							<form action="#" method="post">
@@ -496,6 +496,74 @@
 							<button class="btn type2 js-cancel">Отмена</button>
 							<button class="btn">Сохранить</button>
 						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-wrapper" id="modal-sign">
+		<div class="modal">
+			<div class="contents">
+				<div class="modal-close" title="Закрыть"></div>
+
+				<h1>Расписаться</h1>
+
+				<form action="#" method="post">
+					<div class="js-scroll" data-max-height="450" data-on-demand="true">
+						<table cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Автор</th>
+									<th>Дата</th>
+									<th>Содержание</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Гурцкий С.Г.</td>
+									<td>13.12.2018</td>
+									<td>
+										<span class="order">Организовать РАБОЧУЮ ГРУППУ</span>
+										<ol>
+											<li><strong>Вадимов И.А.,</strong> Каримов Р.Л.<br/>Контроль<br><strong>плановая дата: 28.12.2018</strong></li>
+										</ol>
+									</td>
+								</tr>
+								<tr>
+									<td>Анотонов А.Г.</td>
+									<td>13.12.2018</td>
+									<td>
+										<span class="order">Всем подразделениям</span>
+										<ol>
+											<li><strong>Ларина И.В., Ларина И.В., </strong> Каримов Р.Л., Войнов Д.А., Доренко П.А., Вавилов Ф.А., Авалов И.К.<br/>Прошу принять участие в выполнении поручения<br><strong>плановая дата: 28.12.2018</strong></li>
+											<li><strong>Каримов Р.Л., Войнов Д.А., </strong> Доренко П.А.<br/>Выполнение основных сценариев<br><strong>плановая дата: 17.12.2018</strong></li>
+										</ol>
+									</td>
+								</tr>
+								<tr>
+									<td>Глебов Ф.Ф.</td>
+									<td>13.12.2018</td>
+									<td>
+										<span class="order">ОЗНАКОМИТЬСЯ</span>
+										<ol>
+											<li><strong>Каримов Р.Л., Войнов Д.А., Ларина И.В., Ларина И.В., </strong> Доренко П.А., Вавилов Ф.А., Авалов И.К.<br/>Сообщить о смене реквизитов<br><strong>плановая дата: 28.12.2018</strong></li>
+											<li><strong>Каримов Р.Л. </strong> Доренко П.А.<br/>Личный кабинет</li>
+										</ol>
+									</td>
+								</tr>
+								<tr>
+									<td>Гурцкий С.Г.</td>
+									<td>13.12.2018</td>
+									<td><span class="order">Ознакомлен</span></td>
+								</tr>
+							</tbody>
+						</table>					
+					</div>
+
+					<div class="btn-line">
+						<button class="btn type2 js-cancel">Отмена</button>
+						<button class="btn">Расписаться</button>
 					</div>
 				</form>
 			</div>

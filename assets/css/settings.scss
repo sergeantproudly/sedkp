@@ -29,6 +29,14 @@ $color-button3-text: #FFF;
 $color-button3-text-hover: #FFF;
 $color-button3-text-active: #FFF;
 $color-button3-text-disabled: #f1b9b9;
+$color-button5: darken(#689ABC, 20%);
+$color-button5-hover: darken(#598BAE, 20%);
+$color-button5-active: darken(#426E8C, 20%);
+$color-button5-disabled: #86aec9;
+$color-button5-text: #FFF;
+$color-button5-text-hover: #FFF;
+$color-button5-text-active: #FFF;
+$color-button5-text-disabled: #c2d6e4;
 $padding-edges: 2.34%;
 $padding-edges-tablet: 3.5%;
 $padding-edges-tablet-small: 4.75%;
@@ -288,6 +296,31 @@ b,strong{
 			&:active {			
 				color: #b9b9b9;	
 				box-shadow: 0px 2px 12px rgba(165, 174, 177, 0.27);
+			}
+		}
+	}
+
+	&.type5 {
+		background-color: $color-button5;
+		color: $color-button5-text;
+		&:hover {
+			background-color: $color-button5-hover;
+			color: $color-button5-text-hover;
+		}
+		&:active {
+			background-color: $color-button5-active;	
+			color: $color-button5-text-active;
+		}
+		&[disabled] {
+			background-color: $color-button5-disabled;
+			color: $color-button5-text-disabled;
+			&:hover {
+				background-color: $color-button5-disabled;
+				color: $color-button5-text-disabled;
+			}
+			&:active {
+				background-color: $color-button5-disabled;
+				color: $color-button5-text-disabled;
 			}
 		}
 	}
