@@ -743,9 +743,9 @@ header {
 				}
 
 				.close {
-					position: fixed;
+					position: absolute;
 					top: 0;
-					@extend %edge-left;
+					left: 19px;
 					width: 33px;
 					height: 33px;
 					padding: 21px;
@@ -773,6 +773,24 @@ header {
 						@extend .rotate-180-end;
 					}
 				}
+
+				.logout {
+					display: block;
+					padding: 30px 19px;
+					color: #868b8e;
+					text-decoration: none;
+					@extend .transition-opacity;
+
+					&:before {
+						content: '';
+						display: inline-block;
+						vertical-align: middle;
+						width: 15px;
+						height: 16px;
+						background-image: url('../../images/ico_logout.svg');
+						margin: -4px 9px 0 0;
+					}
+				}
 			}
 
 			.html-modal-long & {
@@ -784,6 +802,10 @@ header {
 				.close {
 					position: absolute;
 				}
+			}
+
+			.logout {
+				display: none;
 			}
 		}
 

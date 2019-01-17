@@ -235,6 +235,12 @@ function onResize() {
 		}
 	}
 
+	if (__isMobileTabletMiddle) {
+		$('#bl-account .logout').appendTo('header .menu-holder nav');
+	} else {
+		$('header .menu-holder nav>.logout').appendTo('#bl-account');
+	}
+
 	fadeoutInit();
 }
 
@@ -568,7 +574,7 @@ function _scrollTo(target, offset) {
 						e.stopPropagation();
 						$('html').removeClass('html-mobile-opened html-mobile-long');
 						$('.modal-fadeout').stop().fadeOut(300);
-					}).data('inited', true);				
+					}).data('inited', true);
 				}
 
 				$('html').addClass('html-mobile-opened');
@@ -589,7 +595,7 @@ function _scrollTo(target, offset) {
 					var offset = distance;
 
 					if (phase === $.fn.swipe.phases.PHASE_START) {
-						var origPos = $(this).scrollLeft();
+						var origPos = $(this).scrollTop();
 						$(this).data('origPos', origPos);
 
 					} else if (phase === $.fn.swipe.phases.PHASE_MOVE) {
@@ -598,16 +604,10 @@ function _scrollTo(target, offset) {
 						if (direction == 'up') {
 							var scroll_value_new = origPos - 0 + offset;
 							$(this).scrollTop(scroll_value_new);
-							if (scroll_value_new <= 0) {
-								$('#menu-main>.close').stop().fadeIn(__animationSpeed*0.3);
-							}
 
 						} else if (direction == 'down') {
 							var scroll_value_new = origPos - offset;
 							$(this).scrollTop(scroll_value_new);
-							if (scrollValue > 0) {
-								$('#menu-main>.close').stop().fadeOut(__animationSpeed*0.3);
-							}
 						}
 
 					} else if (phase === $.fn.swipe.phases.PHASE_CANCEL) {
@@ -621,6 +621,9 @@ function _scrollTo(target, offset) {
 			},
 			threshold: 70
 		});
+		if (__isMobileTabletMiddle) {
+			$('#bl-account .logout').appendTo('header .menu-holder nav');
+		}
 
 		// MAILER
 		if ($('#doc-list').length) {
