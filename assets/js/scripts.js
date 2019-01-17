@@ -895,5 +895,12 @@ function _scrollTo(target, offset) {
 			filterActorsList($('#add-executors-keyword').val().toLowerCase(), $('#modal-add-executors .actors-list'));
 		}
 
+		if ($('#assignment').length) {			
+			$('#assignment-add-executors-keyword').on('focusout keyup change', function() {
+				filterActorsList($('#assignment-add-executors-keyword').val().toLowerCase(), $('#assignment .actors-list'));
+			});
+			filterActorsList($('#assignment-add-executors-keyword').val().toLowerCase(), $('#assignment .actors-list'));
+		}
+
 	})
 })(jQuery)
