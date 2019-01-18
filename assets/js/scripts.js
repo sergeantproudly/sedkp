@@ -351,7 +351,7 @@ function fadeoutInit(node) {
 			$(block).data('inited', true);
 		}
 
-		if (typeof($(block).attr('data-nowrap')) != 'undefined' && $(block).attr('data-nowrap') != false) {
+		if (typeof($(block).attr('data-nowrap')) != 'undefined' && $(block).attr('data-nowrap') != false && $(block).attr('data-nowrap') != 'false') {
 			$(block).addClass('nowrap');
 		}
 		$(block).scrollLeft(0);
