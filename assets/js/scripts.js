@@ -904,6 +904,31 @@ function _scrollTo(target, offset) {
 				filterActorsList($('#assignment-add-executors-keyword').val().toLowerCase(), $('#assignment .actors-list'));
 			});
 			filterActorsList($('#assignment-add-executors-keyword').val().toLowerCase(), $('#assignment .actors-list'));
+
+			$('#assignment .actors-list>li>input:checkbox').change(function() {
+				if ($(this).prop('checked')) {
+					$('#assignment-executors-list').show();
+
+					var label = $(this).siblings('label').text();
+					var id = $(this).attr('id') + '-label';
+					$('#assignment-executors-list').append('<li id="'+ id + '"><span>' + label + '</span><span class="action-remove"></span></li>');
+					$('#assignment-executors-list>li:last .action-remove').click(function() {
+						var that = this;
+						$(that).closest('li').stop().fadeOut(__animationSpeed, function() {
+							$(that).remove();
+							if (!$('#assignment-executors-list>li').length) {
+								$('#assignment-executors-list').hide();
+							}
+						});	
+					});
+
+				} else {
+					var id = $(this).attr('id') + '-label';
+					console.log(id);
+					$('#' + id).children('.action-remove').click();
+				}
+			});
+			$('#assignment .actors-list>li>input:checkbox:checked').change();
 		}
 
 	})
