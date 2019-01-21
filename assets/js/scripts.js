@@ -626,7 +626,7 @@ function _scrollTo(target, offset) {
 		}
 
 		// MAILER
-		if ($('#doc-list').length) {
+		if ($('#doc-list').length && $('#doc-list>ul>li').length) {
 			if (!__isMobileTabletMiddle) {
 				docListPos();
 			}
