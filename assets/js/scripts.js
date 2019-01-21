@@ -412,7 +412,8 @@ function fadeoutInit(node) {
 							$(this).data('origPos', $(this).scrollLeft());
 						}
 					},
-					threshold: 70
+					threshold: 70,
+					preventDefaultEvents: false
 				});
 			} else {
 				$(block).removeClass('fadeout');
