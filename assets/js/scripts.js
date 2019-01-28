@@ -334,7 +334,8 @@ function scrollInit(block) {
 					showArrows: false,
 					mouseWheelSpeed: 20,
 					autoReinitialise: true,
-					verticalGutter: 0
+					verticalGutter: 0,
+					verticalDragMinHeight: 36
 				}
 			);
 		}
