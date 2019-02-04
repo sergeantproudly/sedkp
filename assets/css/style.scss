@@ -3603,6 +3603,19 @@ header {
 						display: none;
 					}
 				}
+
+				.doc-basis {
+					display: inline-block;
+					vertical-align: top;
+
+					li {
+						margin-left: 6px;
+
+						&:before {
+							display: none;
+						}
+					}
+				}
 			}
 		}
 	}
