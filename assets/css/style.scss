@@ -3611,6 +3611,10 @@ header {
 					li {
 						margin-left: 6px;
 
+						@media (max-width: $adaptive-width-tablet-middle) {
+							display: inline-block;
+						}
+
 						&:before {
 							display: none;
 						}
@@ -3622,6 +3626,19 @@ header {
 
 	.actions-right {
 		margin: -38px 0 20px;
+
+		&.sign-wrapper {
+			margin: 0;
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			@media (max-width: $adaptive-width-tablet-small) {
+				position: static;
+				text-align: left;
+				margin-bottom: 20px;
+			}
+		}
 	}
 
 	.date {
@@ -3630,7 +3647,12 @@ header {
 	}
 
 	.text {
-		max-width: 1140px;
+		max-width: 1305px;
+		padding-right: 165px;
+
+		@media (max-width: $adaptive-width-tablet-small) {
+			padding-right: 0;
+		}
 	}
 
 	.block {
