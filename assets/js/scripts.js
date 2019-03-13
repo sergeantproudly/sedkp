@@ -647,7 +647,7 @@ function _scrollTo(target, offset) {
 			// FIXME DEMO
 			$('#doc-list>ul>li>h3>a').click(function(e) {
 				e.preventDefault();
-				e.stopPropagation();
+				//e.stopPropagation();
 			});
 			$('#doc-list>ul>li').click(function() {
 				if (!$(this).hasClass('active')) {
